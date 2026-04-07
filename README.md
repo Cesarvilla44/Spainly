@@ -178,15 +178,6 @@ Todos los contadores empiezan en **0** y se guardan en LocalStorage.
 - **Request Logging**: Peticiones API registradas
 - **Error Handling**: Respuestas consistentes
 
-## 🤝 Contribución
-
-### Cómo Contribuir
-1. **Fork del repositorio**
-2. **Crear rama de características**
-3. **Realizar cambios**
-4. **Crear Pull Request**
-5. **Esperar revisión**
-
 ### Guía de Estilo
 - **Código Limpio**: Comentarios donde sea necesario
 - **Nombres Descriptivos**: Variables y funciones claras
@@ -202,7 +193,7 @@ Este proyecto está bajo la **Licencia MIT** - puedes usarlo, modificarlo y dist
 **César Villacañas Moreno**
 - 📧 Email: cesar.villacanas@alu.ceacfp.es
 - 📚 Curso: 2026-2027
-- 🐙 GitHub: [https://github.com/Cesarvilla44/Spainly](https://github.com/Cesarvilla44/Spainly)
+- 🐙 GitHub: [https://github.com/Cesarvilla44]
 
 ## 🌟 Agradecimientos
 
