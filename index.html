@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spainly - Descubre España</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'spain-red': '#c41e3a',
+                        'spain-yellow': '#f1bf00'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-flag text-spain-red text-2xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Spainly</h1>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Botones de usuario -->
+                    <button id="registerBtn" class="px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                        <i class="fas fa-user-plus mr-2"></i>Registrarse
+                    </button>
+                    <button id="loginBtn" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Iniciar sesión
+                    </button>
+                    <button id="reportsBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-newspaper mr-2"></i>Reportajes
+                    </button>
+                    <button id="aboutBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-info-circle mr-2"></i>Sobre mí
+                    </button>
+                    
+                    <!-- Botón modo oscuro -->
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Mensaje de bienvenida -->
+        <section class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                <i class="fas fa-globe-americas text-spain-red mr-3"></i>
+                ¡Bienvenido a Spainly!
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Descubre los lugares más fascinantes de España. Explora desde playas paradisíacas hasta majestuosas montañas, 
+                encuentra tu próximo destino y crea recuerdos inolvidables en la tierra de la pasión y la cultura.
+            </p>
+        </section>
+
+        <!-- Barra de búsqueda y filtros -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <i class="fas fa-search mr-2"></i>Búsqueda
+                    </label>
+                    <input type="text" id="searchInput" placeholder="Buscar lugares..." 
+                           class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Provincia
+                    </label>
+                    <select id="provinceFilter" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                        <option value="">Todas las provincias</option>
+                        <option value="barcelona">Barcelona</option>
+                        <option value="madrid">Madrid</option>
+                        <option value="sevilla">Sevilla</option>
+                        <option value="valencia">Valencia</option>
+                        <option value="malaga">Málaga</option>
+                        <option value="granada">Granada</option>
+                        <option value="cordoba">Córdoba</option>
+                        <option value="alicante">Alicante</option>
+                        <option value="zaragoza">Zaragoza</option>
+                        <option value="bilbao">Bilbao</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <i class="fas fa-mountain mr-2"></i>Categoría
+                    </label>
+                    <select id="categoryFilter" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                        <option value="">Todas las categorías</option>
+                        <option value="montaña">Montaña</option>
+                        <option value="playa">Playa</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <i class="fas fa-clock mr-2"></i>Horario
+                    </label>
+                    <select id="scheduleFilter" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                        <option value="">Todos los horarios</option>
+                        <option value="24h">24 horas</option>
+                        <option value="09-20">09:00 - 20:00</option>
+                        <option value="10-18">10:00 - 18:00</option>
+                        <option value="08-19">08:00 - 19:00</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lugares recomendados -->
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                <i class="fas fa-star text-spain-yellow mr-2"></i>Lugares Recomendados
+            </h3>
+            <div id="recommendedPlaces" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Las tarjetas de lugares se generarán dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sistema de contadores -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="searchCounter">
+                    <div class="text-3xl text-spain-red mb-2">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 dark:text-white" id="searchCount">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Búsquedas</div>
+                </div>
+                
+                <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="favoriteCounter">
+                    <div class="text-3xl text-spain-red mb-2">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 dark:text-white" id="favoriteCount">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Favoritos</div>
+                </div>
+                
+                <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="ratingCounter">
+                    <div class="text-3xl text-spain-yellow mb-2">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 dark:text-white" id="ratingCount">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Valoraciones</div>
+                </div>
+                
+                <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="userCounter">
+                    <div class="text-3xl text-spain-red mb-2">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 dark:text-white" id="userCount">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Usuario</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Todos los lugares -->
+        <section>
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                <i class="fas fa-map text-spain-yellow mr-2"></i>Todos los Lugares
+            </h3>
+            <div id="allPlaces" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Las tarjetas de lugares se generarán dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Spainly - Descubre España. Todos los derechos reservados.</p>
+            <div class="mt-4">
+                <a href="https://github.com/tu-username/spainly" target="_blank" class="text-spain-yellow hover:text-yellow-400">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales -->
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                <i class="fas fa-user-plus text-spain-red mr-2"></i>Registrarse
+            </h3>
+            <form id="registerForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nombre de usuario</label>
+                    <input type="text" id="regUsername" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                    <input type="email" id="regEmail" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contraseña</label>
+                    <input type="password" id="regPassword" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="flex-1 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                        Registrarse
+                    </button>
+                    <button type="button" onclick="closeModal('registerModal')" class="flex-1 px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                <i class="fas fa-sign-in-alt text-spain-yellow mr-2"></i>Iniciar Sesión
+            </h3>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contraseña</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="flex-1 px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                        Iniciar Sesión
+                    </button>
+                    <button type="button" onclick="closeModal('loginModal')" class="flex-1 px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mensaje "Conseguido" -->
+    <div id="conseguidoMessage" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="conseguidoText">¡Conseguido!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
