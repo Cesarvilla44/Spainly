@@ -1,15 +1,7 @@
 {
   "version": 2,
   "name": "spainly",
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static",
-      "config": {
-        "distDir": ""
-      }
-    }
-  ],
+ 
   "routes": [
     {
       "src": "/api/(.*)",
