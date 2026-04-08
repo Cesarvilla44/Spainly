@@ -45,13 +45,12 @@ function verifyToken(req, res, next) {
 }
 
 // Ruta de salud
+// Ruta de salud accesible mediante /api/health
 app.get('/api/health', (req, res) => {
-    res.json({
-        success: true,
-        message: '¡Conseguido! Servidor Spainly funcionando correctamente',
-        timestamp: new Date().toISOString()
-    });
+    res.json({ success: true, message: 'Servidor activo' });
 });
+
+
 
 // Rutas de autenticación
 app.post('/api/auth/register', async (req, res) => {
