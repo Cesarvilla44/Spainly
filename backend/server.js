@@ -45,7 +45,7 @@ function verifyToken(req, res, next) {
 }
 
 // Ruta de salud
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
     res.json({
         success: true,
         message: '¡Conseguido! Servidor Spainly funcionando correctamente',
