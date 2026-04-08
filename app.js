@@ -32,14 +32,25 @@ class SpainlyApp {
     }
 
     async connectToServer() {
-        try {
-            // Simular conexión con el servidor
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            this.showConseguido('¡Conseguido! Conectado al servidor correctamente');
-        } catch (error) {
-            console.error('Error conectando al servidor:', error);
+    try {
+        // Unificamos la ruta para que siempre use el prefijo /api que configuramos en vercel.json
+        const API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api/health' 
+            : '/api/health';
+
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (data.success) {
+            this.showConseguido(data.message); // Mostrará: "¡Conseguido! Servidor Spainly funcionando..."
         }
+    } catch (error) {
+        console.error('Error conectando al servidor:', error);
+        this.showError('No se pudo conectar con el servidor backend');
     }
+}
+
 
     async loadPlaces() {
         // 40 lugares famosos de España
