@@ -485,11 +485,4 @@ app.get('/api/stats', verifyToken, (req, res) => {
     }
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor Spainly iniciado en el puerto ${PORT}`);
-    console.log(`📍 Health check: http://localhost:${PORT}/health`);
-    console.log(`📚 API Documentation: http://localhost:${PORT}/api`);
-});
-
 module.exports = app;
