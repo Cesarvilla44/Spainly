@@ -9,7 +9,8 @@
   ],
   "functions": {
     "backend/server.js": {
-      "runtime": "nodejs18.x"
+      "memory": 1024,
+      "maxDuration": 10
     }
   },
   "env": {
