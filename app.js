@@ -133,7 +133,7 @@ class SpainlyApp {
                 province: "murcia",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/bolnuevo/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Las_Gredas_de_Bolnuevo.jpg/400/300.jpg",
                 description: "Playa con formación rocas únicas en Murcia",
                 fullDescription: "Las Gredas de Bolnuevo son unas formaciones rocosas espectaculares junto a esta playa de aguas tranquilas. Las rocas erosionadas por el viento y el mar crean formas caprichosas que parecen sacadas de otro planeta.",
                 rating: 4.4,
@@ -167,13 +167,13 @@ class SpainlyApp {
                 id: 10,
                 name: "Alcázar de Segovia",
                 province: "segovia",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-18",
-                image: "https://picsum.photos/seed/alcazar/400/300",
-                description: "Castillo medieval inspirador de Disney",
-                fullDescription: "El Alcázar de Segovia es uno de los castillos más impresionantes de España. Su arquitectura medieval inspiró a Walt Disney para el castillo de la Bella Durmiente. Las vistas desde su torre del homenaje son espectaculares.",
-                rating: 4.6,
-                reviews: 11230
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Alc%C3%A1zar_de_Segovia_04.jpg/400/300.jpg",
+                description: "Castillo inspirador de Disney",
+                fullDescription: "El Alcázar de Segovia es una fortaleza palaciega que data del siglo XII. Su silueta inspiró el castillo de la Cenicienta de Disney. Desde sus torres se contempla un paisaje impresionante.",
+                rating: 4.8,
+                reviews: 15670
             },
             {
                 id: 11,
@@ -191,13 +191,13 @@ class SpainlyApp {
                 id: 12,
                 name: "Monasterio de El Escorial",
                 province: "madrid",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-18",
-                image: "https://picsum.photos/seed/escorial/400/300",
-                description: "Monumento renacentista y residencia real",
-                fullDescription: "El Monasterio de San Lorenzo de El Escorial es una joya del Renacimiento español. Construido por Felipe II, combina monasterio, palacio, biblioteca y mausoleo. Su arquitectura sobria y majestuosa refleja el poder de la España del siglo XVI.",
-                rating: 4.5,
-                reviews: 9450
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/El_Escorial_from_the_air_-_2017.jpg/400/300.jpg",
+                description: "Monumento renacentista del siglo XVI",
+                fullDescription: "El Monasterio de San Lorenzo de El Escorial es una de las maravillas de la arquitectura renacentista. Construido por Felipe II, combina palacio, basílica, biblioteca y monasterio en un complejo monumental.",
+                rating: 4.7,
+                reviews: 13450
             },
             {
                 id: 13,
@@ -217,7 +217,7 @@ class SpainlyApp {
                 province: "valencia",
                 category: "montaña",
                 schedule: "10-19",
-                image: "https://picsum.photos/seed/cac/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Ciudad_de_las_Artes_y_las_Ciencias_-_Valencia_-_Espa%C3%B1a_2016.jpg/400/300.jpg",
                 description: "Complejo arquitectónico y cultural de Santiago Calatrava",
                 fullDescription: "La Ciudad de las Artes y las Ciencias es un ejemplo de arquitectura futurista. Diseñada por Santiago Calatrava, sus edificios blancos y formas orgánicas crean un paisaje único. El Oceanográfico es el mayor acuario de Europa.",
                 rating: 4.4,
@@ -229,7 +229,7 @@ class SpainlyApp {
                 province: "almeria",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/monsul/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Playa_de_Monsul_Cabo_de_Gata.jpg/400/300.jpg",
                 description: "Playa volcánica en el Cabo de Gata",
                 fullDescription: "La Playa de Mónsul es famosa por su dunas de arena volcánica oscura y su peña en el mar. Fue escenario de películas como Indiana Jones. Sus aguas transparentes y paisaje árido la hacen única.",
                 rating: 4.6,
@@ -253,7 +253,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/caleta/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Playa_de_la_Caleta_Cadiz.jpg/400/300.jpg",
                 description: "Playa histórica donde aterizó Colón",
                 fullDescription: "La Playa de la Caleta es la única playa de arena en el casco antiguo de Cádiz. Su historia es legendaria, se dice que fue el último lugar europeo que pisó Cristóbal Colón antes de llegar a América.",
                 rating: 4.3,
@@ -289,7 +289,7 @@ class SpainlyApp {
                 province: "burgos",
                 category: "montaña",
                 schedule: "10-19",
-                image: "https://picsum.photos/seed/catedralburgos/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Burgos_Cathedral_-_Facade.jpg/400/300.jpg",
                 description: "Catedral gótica del siglo XIII",
                 fullDescription: "La Catedral de Burgos es una joya del gótico español. Sus agujas esbeltas y su impresionante crucero la hacen única. Alberga obras de arte de artistas como Gil de Siloé y Felipe Bigarny.",
                 rating: 4.6,
@@ -313,7 +313,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "montaña",
                 schedule: "10-20",
-                image: "https://picsum.photos/seed/prado/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Museo_del_Prado_-_Madrid_-_Spain_2015.jpg/400/300.jpg",
                 description: "Uno de los museos más importantes del mundo",
                 fullDescription: "El Museo del Prado alberga la mejor colección de pintura española del mundo. Obras maestras de Velázquez, Goya, El Greco y otros genios. Su edificio neoclásico es tan impresionante como su contenido.",
                 rating: 4.7,
@@ -325,7 +325,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/zahara/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Playa_de_Zahara_de_los_Atunes.jpg/400/300.jpg",
                 description: "Playa virgen en el parque de la Breña",
                 fullDescription: "Zahara de los Atunes tiene una de las playas más vírgenes de Cádiz. Su extensión de arena dorada y aguas limpias la hacen perfecta para escapar del bullicio. El pueblo blanco en la colina completa el paisaje.",
                 rating: 4.5,
@@ -337,7 +337,7 @@ class SpainlyApp {
                 province: "almeria",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://picsum.photos/seed/alcazaba/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Alcazaba_de_Almeria_01.jpg/400/300.jpg",
                 description: "Fortaleza musulmana del siglo X",
                 fullDescription: "La Alcazaba de Almería es la mayor fortaleza musulmana de España. Construida en el siglo X, dominaba la medina y el puerto. Sus murallas y patios ofrecen vistas espectaculares de la ciudad y el mar.",
                 rating: 4.4,
@@ -349,7 +349,7 @@ class SpainlyApp {
                 province: "fuerteventura",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/corralejo/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Corralejo_Dunes_Fuerteventura.jpg/400/300.jpg",
                 description: "Parque natural de dunas en Corralejo",
                 fullDescription: "Corralejo tiene un parque natural de dunas que parece el Sahara. Las dunas de origen volcánico se unen a playas de arena blanca y aguas turquesas. Ideal para practicar windsurf y kitesurf.",
                 rating: 4.6,
@@ -361,7 +361,7 @@ class SpainlyApp {
                 province: "barcelona",
                 category: "montaña",
                 schedule: "09-20",
-                image: "https://picsum.photos/seed/batllo/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Casa_Batll%C3%B3_-_Barcelona.jpg/400/300.jpg",
                 description: "Obra maestra de Gaudí en Paseo de Gracia",
                 fullDescription: "La Casa Batlló es una fantasía arquitectónica de Gaudí. Su fachada con huesos y máscaras, el interior sin líneas rectas y el tejado escamoso la hacen única. Los balcones parecen calaveras, el tejado un dragón.",
                 rating: 4.7,
@@ -385,7 +385,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://picsum.photos/seed/palacioreal/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Palacio_Real_de_Madrid_2016.jpg/400/300.jpg",
                 description: "Residencia oficial de la familia real española",
                 fullDescription: "El Palacio Real de Madrid es la residencia oficial del rey de España, aunque solo se usa para ceremonias. Con más de 3.000 habitaciones, es el palacio real más grande de Europa occidental.",
                 rating: 4.5,
@@ -421,7 +421,7 @@ class SpainlyApp {
                 province: "asturias",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/artedo/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Playa_de_Artedo_Cudillero.jpg/400/300.jpg",
                 description: "Playa rústica en el concejo de Cudillero",
                 fullDescription: "La Concha de Artedo es una playa virgen rodeada de acantilados verdes. Su arena fina y aguas tranquilas la hacen perfecta para relajarse. El paisaje asturiano con sus prados y vacias la hace especial.",
                 rating: 4.4,
@@ -457,7 +457,7 @@ class SpainlyApp {
                 province: "salamanca",
                 category: "montaña",
                 schedule: "10-20",
-                image: "https://picsum.photos/seed/salamanca/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Plaza_Mayor_de_Salamanca.jpg/400/300.jpg",
                 description: "Ciudad dorada con la universidad más antigua",
                 fullDescription: "Salamanca es conocida como la Ciudad Dorada por el color de su piedra. Su universidad es una de las más antiguas de Europa. La Plaza Mayor es considerada la más bella de España.",
                 rating: 4.6,
@@ -493,7 +493,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/lances/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Playa_de_los_Lances_Tarifa.jpg/400/300.jpg",
                 description: "Playa donde se descubrió América",
                 fullDescription: "Los Lances en Tarifa es donde se dice que se avistó América por primera vez. Es el punto más al sur de Europa, donde se juntan el Mediterráneo y el Atlántico. Perfecta para deportes acuáticos.",
                 rating: 4.3,
@@ -512,12 +512,24 @@ class SpainlyApp {
                 reviews: 19870
             },
             {
+                id: 9,
+                name: "Cabo de Gata",
+                province: "almeria",
+                category: "playa",
+                schedule: "08-20",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cabo_de_Gata_-_Playa_de_los_Muertos.jpg/400/300.jpg",
+                description: "Parque natural con calas vírgenes y aguas cristalinas",
+                fullDescription: "El Cabo de Gata-Níjar es un parque natural situado en el extremo más oriental de la provincia de Almería. Es uno de los espacios naturales de mayor valor ecológico de la costa mediterránea occidental.",
+                rating: 4.7,
+                reviews: 12890
+            },
+            {
                 id: 39,
                 name: "Playa de Mónsul",
                 province: "almeria",
                 category: "playa",
                 schedule: "24h",
-                image: "https://picsum.photos/seed/monsul2/400/300",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Playa_de_Monsul_Cabo_de_Gata.jpg/400/300.jpg",
                 description: "Playa volcánica en el Cabo de Gata",
                 fullDescription: "Mónsul es famosa por su dunas volcánicas y su peña. Fue escenario de Indiana Jones y el Último Cruzado. Sus aguas cristalinas y paisaje lunar la hacen única en el Mediterráneo.",
                 rating: 4.6,
@@ -772,9 +784,9 @@ class SpainlyApp {
                             <div class="mb-6">
                                 <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3">Fotos del lugar</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <img src="https://picsum.photos/seed/${place.name}1/400/300" alt="${place.name} 1" class="w-full h-32 object-cover rounded-lg">
-                                    <img src="https://picsum.photos/seed/${place.name}2/400/300" alt="${place.name} 2" class="w-full h-32 object-cover rounded-lg">
-                                    <img src="https://picsum.photos/seed/${place.name}3/400/300" alt="${place.name} 3" class="w-full h-32 object-cover rounded-lg">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/${place.name.replace(/\s+/g, '_')}_1.jpg/400/300.jpg" alt="${place.name} 1" class="w-full h-32 object-cover rounded-lg">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/${place.name.replace(/\s+/g, '_')}_2.jpg/400/300.jpg" alt="${place.name} 2" class="w-full h-32 object-cover rounded-lg">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/${place.name.replace(/\s+/g, '_')}_3.jpg/400/300.jpg" alt="${place.name} 3" class="w-full h-32 object-cover rounded-lg">
                                 </div>
                             </div>
                             
@@ -1128,7 +1140,7 @@ class SpainlyApp {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Ordesa -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/ordesa/600/400" alt="Ordesa" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Ordesa_y_Monte_Perdido.jpg/600/400.jpg" alt="Ordesa" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-mountain text-spain-red mr-2"></i>Ordesa y Monte Perdido
@@ -1148,7 +1160,7 @@ class SpainlyApp {
 
                         <!-- Grazalema -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/grazalema/600/400" alt="Grazalema" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Grazalema_Sierra.jpg/600/400.jpg" alt="Grazalema" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-tree text-green-600 mr-2"></i>Parque Natural de Grazalema
@@ -1168,7 +1180,7 @@ class SpainlyApp {
 
                         <!-- Islas Cíes -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/cies/600/400" alt="Islas Cíes" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rodas_Beach_Cies_Islands.jpg/600/400.jpg" alt="Islas Cíes" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-umbrella-beach text-blue-500 mr-2"></i>Las Islas Cíes
@@ -1188,7 +1200,7 @@ class SpainlyApp {
 
                         <!-- Lugares icónicos de Baleares -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/baleares/600/400" alt="Baleares" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Cala_Macarella_Menorca.jpg/600/400.jpg" alt="Baleares" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-landmark text-spain-yellow mr-2"></i>Lugares Icónicos de Baleares
@@ -1208,7 +1220,7 @@ class SpainlyApp {
 
                         <!-- Zaragoza -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/zaragoza/600/400" alt="Zaragoza" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Basilica_del_Pilar_Zaragoza.jpg/600/400.jpg" alt="Zaragoza" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-church text-purple-600 mr-2"></i>Qué ver en Zaragoza
@@ -1228,7 +1240,7 @@ class SpainlyApp {
 
                         <!-- Panticosa -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/panticosa/600/400" alt="Panticosa" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lagos_de_Panticosa.jpg/600/400.jpg" alt="Panticosa" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-hot-tub text-cyan-600 mr-2"></i>Los Balnearios de Panticosa
@@ -1248,7 +1260,7 @@ class SpainlyApp {
 
                         <!-- Pico Cares -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/cares/600/400" alt="Pico Cares" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Ruta_del_Cares_Picos_de_Europa.jpg/600/400.jpg" alt="Pico Cares" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-hiking text-orange-600 mr-2"></i>La Ruta del Pico Cares
@@ -1268,7 +1280,7 @@ class SpainlyApp {
 
                         <!-- Mejores playas -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/playas/600/400" alt="Playas" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ses_Illetes_Beach_Formentera.jpg/600/400.jpg" alt="Playas" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-umbrella-beach text-blue-500 mr-2"></i>Las Mejores Playas del País
@@ -1288,7 +1300,7 @@ class SpainlyApp {
 
                         <!-- Doñana -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/donana/600/400" alt="Doñana" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Parque_Nacional_de_Do%C3%B1ana.jpg/600/400.jpg" alt="Doñana" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-leaf text-green-700 mr-2"></i>El Parque Regional de Doñana
@@ -1308,7 +1320,7 @@ class SpainlyApp {
 
                         <!-- Delta del Ebro -->
                         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                            <img src="https://picsum.photos/seed/ebro/600/400" alt="Delta del Ebro" class="w-full h-48 object-cover">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Delta_del_Ebro_from_space.jpg/600/400.jpg" alt="Delta del Ebro" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-3">
                                     <i class="fas fa-water text-blue-600 mr-2"></i>El Delta del Ebro

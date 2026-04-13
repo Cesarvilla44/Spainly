@@ -43,7 +43,7 @@ Spainly es una plataforma turística completa que permite a los usuarios descubr
 - **JavaScript Vanilla** - Lógica completa sin frameworks
 - **LocalStorage** - Persistencia de datos locales
 - **Font Awesome** - Iconos modernos
-- **Picsum Photos** - Imágenes aleatorias para lugares
+- **Wikimedia Commons** - Imágenes reales de lugares turísticos españoles
 
 ### Backend
 - **Node.js** - Entorno de ejecución JavaScript
@@ -208,7 +208,7 @@ Este proyecto está bajo la **Licencia MIT** - puedes usarlo, modificarlo y dist
 
 - **Tailwind CSS** - Framework CSS muy correcto
 - **Font Awesome** - Iconos espectaculares
-- **Picsum Photos** - Imágenes de calidad
+- **Wikimedia Commons** - Imágenes reales de alta calidad
 - **Express.js** - Backend robusto y rápido
 
 ---
