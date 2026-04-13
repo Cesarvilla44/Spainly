@@ -1379,7 +1379,7 @@ class SpainlyApp {
                         <p class="text-gray-600 dark:text-gray-300 mb-6">
                             Spainly está desarrollado con tecnología moderna: HTML5, CSS3 con Tailwind CSS, 
                             JavaScript vanilla para máxima compatibilidad y rendimiento. 
-                            Nuestro diseño es responsive y accesible, funcionando perfectamente 
+                            Mi diseño es responsive y accesible, funcionando perfectamente 
                             en todos los dispositivos.
                         </p>
                         
@@ -1404,8 +1404,8 @@ class SpainlyApp {
                                 <i class="fas fa-user text-white text-2xl"></i>
                             </div>
                             <div>
-                                <p class="font-bold text-gray-800 dark:text-white">Carlos Vidal</p>
-                                <p class="text-gray-600 dark:text-gray-300">cevidal@estudiantes.esei.uva.es</p>
+                                <p class="font-bold text-gray-800 dark:text-white">César Villacañas Moreno</p>
+                                <p class="text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
                                 <p class="text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
                             </div>
                         </div>
