@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Recordatorio: Reservar entradas Alhambra",
+    "description": "No olvidar reservar las entradas para la Alhambra con al menos 1 mes de antelación",
+    "date": "2024-02-01T09:00:00Z",
+    "priority": "high",
+    "completed": false,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Recordatorio: Consultar clima Playa de la Concha",
+    "description": "Revisar el pronóstico del tiempo antes de visitar San Sebastián",
+    "date": "2024-01-20T08:00:00Z",
+    "priority": "medium",
+    "completed": true,
+    "createdAt": "2024-01-14T15:30:00Z",
+    "updatedAt": "2024-01-19T20:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Recordatorio: Comprar guía turística Barcelona",
+    "description": "Adquirir guía turística completa para visitar Barcelona",
+    "date": "2024-01-25T14:00:00Z",
+    "priority": "low",
+    "completed": false,
+    "createdAt": "2024-01-13T12:00:00Z",
+    "updatedAt": "2024-01-13T12:00:00Z"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Visitar Sagrada Familia",
+    "description": "Visitar la famosa basílica de Gaudí en Barcelona",
+    "completed": false,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Explorar Playa de la Concha",
+    "description": "Pasear por la playa más famosa de San Sebastián",
+    "completed": true,
+    "createdAt": "2024-01-14T15:30:00Z",
+    "updatedAt": "2024-01-15T09:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Tour por la Alhambra",
+    "description": "Recorrer el palacio nazarí de Granada",
+    "completed": false,
+    "createdAt": "2024-01-13T12:00:00Z",
+    "updatedAt": "2024-01-13T12:00:00Z"
+  }
+]
