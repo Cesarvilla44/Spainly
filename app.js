@@ -1401,14 +1401,11 @@ class SpainlyApp {
                         <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Autor</h3>
                         <div class="flex items-center space-x-4">
                             <div class="w-16 h-16 bg-spain-red rounded-full flex items-center justify-center">
-                                <i class="fas fa-code text-white text-2xl"></i>
+                                <i class="fas fa-laptop-code text-white text-2xl"></i>
                             </div>
                             <div>
                                 <p class="font-bold text-gray-800 dark:text-white">César Villacañas Moreno</p>
-                                <p class="text-gray-600 dark:text-gray-300 flex items-center">
-                                    <i class="fas fa-laptop-code mr-2 text-spain-yellow"></i>
-                                    cesar.villacanas@alu.ceacfp.es
-                                </p>
+                                <p class="text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
                                 <p class="text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
                             </div>
                         </div>
