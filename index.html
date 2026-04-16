@@ -204,7 +204,7 @@
     <!-- Modal de Registro -->
     <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button data-close-modal="registerModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
@@ -238,7 +238,7 @@
     <!-- Modal de Inicio de Sesión -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button data-close-modal="loginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
@@ -272,6 +272,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="dist/app.js"></script>
+    <script type="module" src="dist/app.js"></script>
 </body>
 </html>

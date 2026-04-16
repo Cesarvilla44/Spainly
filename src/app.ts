@@ -565,28 +565,33 @@ class SpainlyApp {
     }
 
     private setupNavigationListeners(): void {
-        const navButtons = [
-            'searchBtn', 'favoritesBtn', 'ratingsBtn', 'profileBtn',
-            'registerBtn', 'loginBtn', 'reportsBtn', 'aboutBtn'
-        ];
+        console.log('Configurando event listeners de navegación...');
+        
+        // Configurar botones de navegación principales
+        this.setupButton('searchBtn', () => this.goToSearch());
+        this.setupButton('favoritesBtn', () => this.goToFavorites());
+        this.setupButton('ratingsBtn', () => this.goToRatings());
+        this.setupButton('profileBtn', () => this.goToProfile());
+        this.setupButton('registerBtn', () => this.openModal('registerModal'));
+        this.setupButton('loginBtn', () => this.openModal('loginModal'));
+        this.setupButton('reportsBtn', () => this.goToReports());
+        this.setupButton('aboutBtn', () => this.goToAbout());
+        
+        console.log('Event listeners configurados');
+    }
 
-        navButtons.forEach(btnId => {
-            const btn = document.getElementById(btnId);
-            if (btn) {
-                // Remover listeners existentes para evitar duplicados
-                btn.replaceWith(btn.cloneNode(true));
-                const newBtn = document.getElementById(btnId);
-                if (newBtn) {
-                    newBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        console.log(`Botón ${btnId} clickeado`);
-                        this.handleNavigation(btnId);
-                    });
-                }
-            } else {
-                console.warn(`Botón ${btnId} no encontrado`);
-            }
-        });
+    private setupButton(buttonId: string, clickHandler: () => void): void {
+        const btn = document.getElementById(buttonId);
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log(`Botón ${buttonId} clickeado`);
+                clickHandler();
+            });
+            console.log(`Botón ${buttonId} configurado correctamente`);
+        } else {
+            console.warn(`Botón ${buttonId} no encontrado`);
+        }
     }
 
     private setupThemeToggle(): void {
@@ -599,14 +604,44 @@ class SpainlyApp {
     private handleGlobalClick(e: Event): void {
         const target = e.target as HTMLElement;
         
-        if (target.closest('[data-close-modal]')) {
-            const modalId = target.closest('[data-close-modal]')?.getAttribute('data-close-modal');
-            if (modalId) this.closeModal(modalId);
+        // Botones de cerrar modal con data-close-modal
+        const closeBtn = target.closest('[data-close-modal]');
+        if (closeBtn) {
+            const modalId = closeBtn.getAttribute('data-close-modal');
+            if (modalId) {
+                e.preventDefault();
+                this.closeModal(modalId);
+                return;
+            }
         }
         
+        // Botones con onclick="closeModal()"
+        if (target.onclick && target.onclick.toString().includes('closeModal')) {
+            e.preventDefault();
+            const modalId = target.getAttribute('onclick')?.match(/closeModal\('([^']+)'\)/)?.[1];
+            if (modalId) {
+                this.closeModal(modalId);
+                return;
+            }
+        }
+        
+        // Botones de favoritos
+        if (target.closest('.favorite-btn')) {
+            const placeId = parseInt(target.closest('.favorite-btn')?.getAttribute('data-place-id') || '0');
+            if (placeId) {
+                e.preventDefault();
+                this.toggleFavorite(placeId);
+                return;
+            }
+        }
+        
+        // Tarjetas de lugar
         if (target.closest('.place-card')) {
             const placeId = parseInt(target.closest('.place-card')?.getAttribute('data-place-id') || '0');
-            if (placeId) this.showPlaceDetails(placeId);
+            if (placeId) {
+                this.showPlaceDetails(placeId);
+                return;
+            }
         }
     }
 
