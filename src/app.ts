@@ -29,6 +29,13 @@ class SpainlyApp {
     }
 
     private async init(): Promise<void> {
+        // Esperar a que el DOM esté completamente cargado
+        if (document.readyState === 'loading') {
+            await new Promise(resolve => {
+                document.addEventListener('DOMContentLoaded', resolve);
+            });
+        }
+
         try {
             await this.loadPlaces();
             this.setupEventListeners();
@@ -566,10 +573,18 @@ class SpainlyApp {
         navButtons.forEach(btnId => {
             const btn = document.getElementById(btnId);
             if (btn) {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleNavigation(btnId);
-                });
+                // Remover listeners existentes para evitar duplicados
+                btn.replaceWith(btn.cloneNode(true));
+                const newBtn = document.getElementById(btnId);
+                if (newBtn) {
+                    newBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log(`Botón ${btnId} clickeado`);
+                        this.handleNavigation(btnId);
+                    });
+                }
+            } else {
+                console.warn(`Botón ${btnId} no encontrado`);
             }
         });
     }
@@ -1076,8 +1091,17 @@ declare global {
     }
 }
 
-// Inicialización de la aplicación
-const app = SpainlyApp.getInstance();
-window.app = app;
+// Inicialización de la aplicación cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        const app = SpainlyApp.getInstance();
+        window.app = app;
+        console.log('Spainly App inicializada correctamente');
+    });
+} else {
+    const app = SpainlyApp.getInstance();
+    window.app = app;
+    console.log('Spainly App inicializada correctamente (DOM ya listo)');
+}
 
 export default SpainlyApp;
