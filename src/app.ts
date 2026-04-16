@@ -945,55 +945,121 @@ class SpainlyApp {
                         <i class="fas fa-info-circle text-gray-600 mr-3"></i>Sobre mí
                     </h1>
                     
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                        <div class="flex items-center mb-6">
-                            <div class="w-16 h-16 bg-spain-red rounded-full flex items-center justify-center">
-                                <i class="fas fa-laptop-code text-white text-2xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h2 class="text-xl font-bold text-gray-800 dark:text-white">César Villacañas Moreno</h2>
-                                <p class="text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
-                                <p class="text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
-                            </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 space-y-6">
+                        
+                        <!-- Descripción Personal -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                <i class="fas fa-user text-blue-500 mr-2"></i>¿Quién soy?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Soy un desarrollador web apasionado por crear experiencias digitales que combinen funcionalidad y diseño. 
+                                Me especializo en frontend moderno y disfruto trabajando con tecnologías como TypeScript, React y Tailwind CSS. 
+                                Mi objetivo es construir aplicaciones que no solo funcionen bien, sino que también ofrezcan una experiencia excepcional al usuario.
+                            </p>
                         </div>
                         
-                        <div class="space-y-4">
-                            <div>
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Sobre este proyecto</h3>
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    Spainly es una aplicación web desarrollada como parte de mi formación en desarrollo de aplicaciones web. 
-                                    Esta plataforma permite descubrir los lugares más impresionantes de España, con información detallada, 
-                                    valoraciones y la posibilidad de guardar tus lugares favoritos.
-                                </p>
-                            </div>
-                            
-                            <div>
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Tecnologías utilizadas</h3>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">HTML5</span>
-                                    <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">CSS3</span>
-                                    <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">JavaScript</span>
-                                    <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm">TypeScript</span>
-                                    <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-sm">Tailwind CSS</span>
+                        <!-- Objetivos -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                <i class="fas fa-bullseye text-green-500 mr-2"></i>Mis objetivos
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Quiero convertirme en un desarrollador full-stack capaz de crear aplicaciones web completas y escalables. 
+                                Mi meta es dominar tanto el frontend como el backend, entender arquitecturas modernas y poder liderar proyectos 
+                                desde la concepción hasta el despliegue. Busco constantemente aprender nuevas tecnologías y mejores prácticas 
+                                para mejorar mis habilidades y ofrecer soluciones innovadoras.
+                            </p>
+                        </div>
+                        
+                        <!-- Cómo Contribuir -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                <i class="fas fa-hands-helping text-purple-500 mr-2"></i>¿Cómo puedes contribuir?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Puedes contribuir a este proyecto de varias maneras: reportando errores que encuentres, sugiriendo mejoras 
+                                para la interfaz o funcionalidad, o incluso contribuyendo código directamente. Si tienes experiencia en 
+                                desarrollo web y te gustaría añadir nuevas características como más lugares turísticos, filtros avanzados 
+                                o integración con APIs externas, ¡tus contribuciones son bienvenidas! También puedes ayudar probando la aplicación 
+                                y dándome feedback sobre la experiencia de usuario.
+                            </p>
+                        </div>
+                        
+                        <!-- Revisión de Errores -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                                <i class="fas fa-bug text-red-500 mr-2"></i>Revisión de errores
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Me comprometo a revisar y corregir errores de manera diligente. Si encuentras algún problema, 
+                                por favor repórtalo a través de GitHub Issues con la mayor cantidad de detalles posible: 
+                                qué hiciste, qué esperabas que sucediera, y qué ocurrió en realidad. Reviso regularmente 
+                                los reportes y trato de solucionar los problemas lo más rápido posible. También realizo 
+                                pruebas exhaustivas antes de cada actualización para minimizar la aparición de nuevos errores.
+                            </p>
+                        </div>
+                        
+                        <!-- Botón GitHub -->
+                        <div class="text-center py-4">
+                            <a href="https://github.com/Cesarvilla44/Spainly" target="_blank" 
+                               class="inline-flex items-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">
+                                <i class="fab fa-github mr-2"></i>
+                                Ver en GitHub
+                            </a>
+                        </div>
+                        
+                        <!-- Autoría -->
+                        <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center mb-4">
+                                <div class="w-16 h-16 bg-spain-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-laptop-code text-white text-2xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h2 class="text-xl font-bold text-gray-800 dark:text-white">César Villacañas Moreno</h2>
+                                    <p class="text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
+                                    <p class="text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
                                 </div>
                             </div>
                             
-                            <div>
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Características</h3>
-                                <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                                    <li>40 lugares turísticos famosos de España</li>
-                                    <li>Sistema de búsqueda avanzada con filtros</li>
-                                    <li>Gestión de favoritos</li>
-                                    <li>Valoraciones de lugares</li>
-                                    <li>Interfaz responsive y modo oscuro</li>
-                                    <li>Desarrollado con TypeScript y mejores prácticas</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    © 2026 César Villacañas Moreno. Proyecto educativo Spainly.
-                                </p>
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Sobre este proyecto</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Spainly es una aplicación web desarrollada como parte de mi formación en desarrollo de aplicaciones web. 
+                                        Esta plataforma permite descubrir los lugares más impresionantes de España, con información detallada, 
+                                        valoraciones y la posibilidad de guardar tus lugares favoritos.
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Tecnologías utilizadas</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">HTML5</span>
+                                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">CSS3</span>
+                                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">JavaScript</span>
+                                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm">TypeScript</span>
+                                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-sm">Tailwind CSS</span>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Características</h3>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
+                                        <li>40 lugares turísticos famosos de España</li>
+                                        <li>Sistema de búsqueda avanzada con filtros</li>
+                                        <li>Gestión de favoritos</li>
+                                        <li>Valoraciones de lugares</li>
+                                        <li>Interfaz responsive y modo oscuro</li>
+                                        <li>Desarrollado con TypeScript y mejores prácticas</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        © 2026 César Villacañas Moreno. Proyecto educativo Spainly.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
