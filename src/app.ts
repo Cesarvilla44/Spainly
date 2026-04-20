@@ -24,6 +24,8 @@ class SpainlyApp {
             onSearch: (query: string, filters: FilterOptions) => this.handleSearch(query, filters),
             loading: false
         });
+        // Ya no usamos homeSearchBar, usamos HTML directo
+        console.log('SpainlyApp inicializado con búsqueda directa en el home');
         this.init();
     }
 
@@ -85,7 +87,7 @@ class SpainlyApp {
                 province: "barcelona",
                 category: "montaña",
                 schedule: "09-20",
-                image: "images\\lugares\\Sagrada Familia.png",
+                image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
                 description: "Templo católico en construcción, obra maestra de Gaudí",
                 fullDescription: "La Sagrada Familia es el símbolo más reconocido de Barcelona. Esta basílica, diseñada por Antoni Gaudí, comenzó su construcción en 1882 y aún sigue en obras. Su arquitectura única combina elementos góticos y modernistas, creando un espectáculo visual impresionante tanto por fuera como por dentro.",
                 rating: 4.8,
@@ -97,7 +99,7 @@ class SpainlyApp {
                 province: "guipuzcoa",
                 category: "playa",
                 schedule: "24h",
-                image: "images\\lugares\\Playa de La Concha.jpg",
+                image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 description: "Una de las playas más famosas de San Sebastián",
                 fullDescription: "La Playa de la Concha es considerada una de las más bellas del mundo. Con su forma de concha y vistas espectaculares, ofrece arena fina y aguas tranquilas. Perfecta para pasear, nadar o simplemente disfrutar del paisaje único de la Bahía de la Concha.",
                 rating: 4.7,
@@ -109,7 +111,7 @@ class SpainlyApp {
                 province: "granada",
                 category: "montaña",
                 schedule: "08-19",
-                image: "images\\lugares\\Alhambra.jpg",
+                image: "https://images.unsplash.com/photo-1549880348-65ddc2630b7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
                 description: "Palacio nazarí y conjunto monumental de Granada",
                 fullDescription: "La Alhambra es el monumento más visitado de España. Este complejo palaciego-fortaleza del siglo XIII combina arquitectura islámica con jardines exuberantes. Los Patios de los Leones y los Generalife son sus joyas más preciadas.",
                 rating: 4.9,
@@ -121,7 +123,7 @@ class SpainlyApp {
                 province: "barcelona",
                 category: "montaña",
                 schedule: "10-18",
-                image: "images\\lugares\\park-guell.jpg",
+                image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1100&q=80",
                 description: "Parque público diseñado por Antoni Gaudí",
                 fullDescription: "El Park Güell es otro de los genios de Gaudí. Originalmente concebido como urbanización privada, hoy es un parque público donde el modernismo catalán se fusiona con la naturaleza. Sus mosaicos coloridos y estructuras orgánicas crean un mundo mágico.",
                 rating: 4.6,
@@ -133,7 +135,7 @@ class SpainlyApp {
                 province: "grancanaria",
                 category: "playa",
                 schedule: "24h",
-                image: "images\\lugares\\dunas de maspalomas.jpg",
+                image: "https://images.pexels.com/photos/147413/new-york-skyline-manhattan-hudson-147413.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Dunas naturales espectaculares en Gran Canaria",
                 fullDescription: "Las Dunas de Maspalomas son un paisaje único en Gran Canaria. Este extenso arenal natural de 400 hectáreas forma un pequeño desierto junto al mar. Ideal para pasear al amanecer o atardecer cuando la luz crea efectos espectaculares.",
                 rating: 4.5,
@@ -145,7 +147,7 @@ class SpainlyApp {
                 province: "cordoba",
                 category: "montaña",
                 schedule: "10-19",
-                image: "images\\lugares\\mezquita de cordoba.jpg",
+                image: "https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Catedral de estilo califal con bosque de columnas",
                 fullDescription: "La Mezquita-Catedral de Córdoba es un monumento único. Sus más de 850 columnas de mármol, jaspe y granito crean un bosque impresionante. La alternancia de arcos blancos y rojos es una obra maestra del arte islámico.",
                 rating: 4.8,
@@ -157,7 +159,7 @@ class SpainlyApp {
                 province: "murcia",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Las_Gredas_de_Bolnuevo.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa con formación rocas únicas en Murcia",
                 fullDescription: "Las Gredas de Bolnuevo son unas formaciones rocosas espectaculares junto a esta playa de aguas tranquilas. Las rocas erosionadas por el viento y el mar crean formas caprichosas que parecen sacadas de otro planeta.",
                 rating: 4.4,
@@ -169,7 +171,7 @@ class SpainlyApp {
                 province: "tenerife",
                 category: "montaña",
                 schedule: "09-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Mount_Teide_from_Tenerife.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/3889818/pexels-photo-3889818.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Volcán más alto de España y parque nacional",
                 fullDescription: "El Teide, con sus 3.718 metros, es el pico más alto de España. Su paisaje volcánico parece lunar, y el teleférico te lleva casi a la cima para disfrutar de vistas espectaculares del archipiélago canario.",
                 rating: 4.7,
@@ -181,7 +183,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Playa_de_la_Victoria_Cadiz.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa urbana de Cádiz con bandera azul",
                 fullDescription: "La Playa de la Victoria es la más popular de Cádiz. Con más de 3 km de arena dorada y aguas tranquilas, es perfecta para familias. Su paseo marítimo está lleno de bares donde disfrutar del pescado fresco.",
                 rating: 4.3,
@@ -193,7 +195,7 @@ class SpainlyApp {
                 province: "segovia",
                 category: "monumento",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Alc%C3%A1zar_de_Segovia_04.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Castillo inspirador de Disney",
                 fullDescription: "El Alcázar de Segovia es una fortaleza palaciega que data del siglo XII. Su silueta inspiró el castillo de la Cenicienta de Disney. Desde sus torres se contempla un paisaje impresionante.",
                 rating: 4.8,
@@ -205,7 +207,7 @@ class SpainlyApp {
                 province: "formentera",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ses_Illetes_Beach_Formentera.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/33041/antelope-canyon-lake-canyon-arizona.jpg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa paradisíaca en Formentera",
                 fullDescription: "Ses Illetes es considerada una de las playas más bonitas del Mediterráneo. Sus aguas turquesas y arena blanca la hacen parecer el Caribe. El acceso es limitado para preservar este paraíso natural.",
                 rating: 4.9,
@@ -217,7 +219,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "monumento",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/El_Escorial_from_the_air_-_2017.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Monumento renacentista del siglo XVI",
                 fullDescription: "El Monasterio de San Lorenzo de El Escorial es una de las maravillas de la arquitectura renacentista. Construido por Felipe II, combina palacio, basílica, biblioteca y monasterio en un complejo monumental.",
                 rating: 4.7,
@@ -229,7 +231,7 @@ class SpainlyApp {
                 province: "pontevedra",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rodas_Beach_Cies_Islands.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "La playa más famosa de las Islas Cíes",
                 fullDescription: "La Playa de Rodas en las Islas Cíes es un paraíso accesible solo en barco. Sus aguas cristalinas y arena blanca la hacen perfecta para bucear y relajarse. El parque natural la protege manteniéndola virgen.",
                 rating: 4.8,
@@ -241,7 +243,7 @@ class SpainlyApp {
                 province: "valencia",
                 category: "montaña",
                 schedule: "10-19",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Ciudad_de_las_Artes_y_las_Ciencias_-_Valencia_-_Espa%C3%B1a_2016.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/376894/pexels-photo-376894.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Complejo arquitectónico y cultural de Santiago Calatrava",
                 fullDescription: "La Ciudad de las Artes y las Ciencias es un ejemplo de arquitectura futurista. Diseñada por Santiago Calatrava, sus edificios blancos y formas orgánicas crean un paisaje único. El Oceanográfico es el mayor acuario de Europa.",
                 rating: 4.4,
@@ -253,7 +255,7 @@ class SpainlyApp {
                 province: "almeria",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Playa_de_Monsul_Cabo_de_Gata.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/3586966/pexels-photo-3586966.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa volcánica en el Cabo de Gata",
                 fullDescription: "La Playa de Mónsul es famosa por su dunas de arena volcánica oscura y su peña en el mar. Fue escenario de películas como Indiana Jones. Sus aguas transparentes y paisaje árido la hacen única.",
                 rating: 4.6,
@@ -265,7 +267,7 @@ class SpainlyApp {
                 province: "bilbao",
                 category: "montaña",
                 schedule: "10-20",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Guggenheim_Museum_Bilbao.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/450597/pexels-photo-450597.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Museo de arte contemporáneo de Frank Gehry",
                 fullDescription: "El Museo Guggenheim Bilbao transformó la ciudad. Su arquitectura revolucionaria con titanio curvado refleja la luz del río Nervión. Alberga arte contemporáneo de primer nivel y es un icono del siglo XX.",
                 rating: 4.5,
@@ -277,7 +279,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Playa_de_la_Caleta_Cadiz.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa histórica donde aterrizó Colón",
                 fullDescription: "La Playa de la Caleta es la única playa de arena en el casco antiguo de Cádiz. Su historia es legendaria, se dice que fue el último lugar europeo que pisó Cristóbal Colón antes de llegar a América.",
                 rating: 4.3,
@@ -289,7 +291,7 @@ class SpainlyApp {
                 province: "segovia",
                 category: "montaña",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Acueduct_of_Segovia-01.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/3889831/pexels-photo-3889831.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Obra de ingeniería romana del siglo I",
                 fullDescription: "El Acueducto de Segovia es una maravilla de la ingeniería romana. Con sus 167 arcos y más de 15 km de longitud, transportaba agua desde la Sierra de Guadarrama hasta la ciudad. Después de 2.000 años sigue impresionante.",
                 rating: 4.7,
@@ -301,7 +303,7 @@ class SpainlyApp {
                 province: "alicante",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Benidorm_beach_view.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474132/pexels-photo-1474132.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playas de Levante y Poniente en Benidorm",
                 fullDescription: "Benidorm tiene dos playas principales: Levante y Poniente. Con aguas tranquilas y arena dorada, son perfectas para familias. El skyline de la ciudad las convierte en las playas urbanas más espectaculares de España.",
                 rating: 4.2,
@@ -313,7 +315,7 @@ class SpainlyApp {
                 province: "burgos",
                 category: "montaña",
                 schedule: "10-19",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Burgos_Cathedral_-_Facade.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/450272/pexels-photo-450272.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Catedral gótica del siglo XIII",
                 fullDescription: "La Catedral de Burgos es una joya del gótico español. Sus agujas esbeltas y su impresionante crucero la hacen única. Alberga obras de arte de artistas como Gil de Siloé y Felipe Bigarny.",
                 rating: 4.6,
@@ -325,7 +327,7 @@ class SpainlyApp {
                 province: "tenerife",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Las_Teresitas_Beach_Tenerife.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1540258/pexels-photo-1540258.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa con arena blanca traída del Sahara",
                 fullDescription: "Las Teresitas es una playa artificial creada con arena traída del Sahara. Sus aguas tranquilas y el paisaje montaña la hacen especial. Perfecta para nadar y disfrutar de vistas espectaculares del Anaga.",
                 rating: 4.4,
@@ -337,7 +339,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "montaña",
                 schedule: "10-20",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Museo_del_Prado_-_Madrid_-_Spain_2015.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Uno de los museos más importantes del mundo",
                 fullDescription: "El Museo del Prado alberga la mejor colección de pintura española del mundo. Obras maestras de Velázquez, Goya, El Greco y otros genios. Su edificio neoclásico es tan impresionante como su contenido.",
                 rating: 4.7,
@@ -349,7 +351,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Playa_de_Zahara_de_los_Atunes.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474131/pexels-photo-1474131.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa virgen en el parque de la Breña",
                 fullDescription: "Zahara de los Atunes tiene una de las playas más vírgenes de Cádiz. Su extensión de arena dorada y aguas limpias la hacen perfecta para escapar del bullicio. El pueblo blanco en la colina completa el paisaje.",
                 rating: 4.5,
@@ -361,7 +363,7 @@ class SpainlyApp {
                 province: "almeria",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Alcazaba_de_Almeria_01.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1533779/pexels-photo-1533779.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Fortaleza musulmana del siglo X",
                 fullDescription: "La Alcazaba de Almería es la mayor fortaleza musulmana de España. Construida en el siglo X, dominaba la medina y el puerto. Sus murallas y patios ofrecen vistas espectaculares de la ciudad y el mar.",
                 rating: 4.4,
@@ -373,7 +375,7 @@ class SpainlyApp {
                 province: "fuerteventura",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Corralejo_Dunes_Fuerteventura.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1427743/pexels-photo-1427743.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Parque natural de dunas en Corralejo",
                 fullDescription: "Corralejo tiene un parque natural de dunas que parece el Sahara. Las dunas de origen volcánico se unen a playas de arena blanca y aguas turquesas. Ideal para practicar windsurf y kitesurf.",
                 rating: 4.6,
@@ -385,7 +387,7 @@ class SpainlyApp {
                 province: "barcelona",
                 category: "montaña",
                 schedule: "09-20",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Casa_Batll%C3%B3_-_Barcelona.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/3025436/pexels-photo-3025436.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Obra maestra de Gaudí en Paseo de Gracia",
                 fullDescription: "La Casa Batlló es una fantasía arquitectónica de Gaudí. Su fachada con huesos y máscaras, el interior sin líneas rectas y el tejado escamoso la hacen única. Los balcones parecen calaveras, el tejado un dragón.",
                 rating: 4.7,
@@ -397,7 +399,7 @@ class SpainlyApp {
                 province: "valencia",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Malvarrosa_beach_valencia.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474134/pexels-photo-1474134.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa urbana de Valencia",
                 fullDescription: "La Malvarrosa es la playa más famosa de Valencia. Con su paseo marítimo lleno de restaurantes donde disfrutar la paella, es perfecta para un día de playa y gastronomía. Sus puestas de sol son espectaculares.",
                 rating: 4.3,
@@ -409,7 +411,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Palacio_Real_de_Madrid_2016.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1533778/pexels-photo-1533778.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Residencia oficial de la familia real española",
                 fullDescription: "El Palacio Real de Madrid es la residencia oficial del rey de España, aunque solo se usa para ceremonias. Con más de 3.000 habitaciones, es el palacio real más grande de Europa occidental.",
                 rating: 4.5,
@@ -421,7 +423,7 @@ class SpainlyApp {
                 province: "menorca",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Cala_Macarella_Menorca.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474135/pexels-photo-1474135.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Calita paradisíaca en Menorca",
                 fullDescription: "Cala Macarella es una de las calas más bonitas de Menorca. Sus aguas turquesas y arena blanca rodeadas de pinos la hacen un paraíso. El acceso a pie por un sendero la mantiene virgen.",
                 rating: 4.8,
@@ -433,7 +435,7 @@ class SpainlyApp {
                 province: "larioja",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Rioja_vineyards_Spain.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474136/pexels-photo-1474136.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Región vinícola con bodegas centenarias",
                 fullDescription: "La Rioja Alta es el corazón del vino español. Sus bodegas centenarias, viñedos infinitos y pueblos medievales crean un paisaje único. Las catas de vino y la gastronomía completan la experiencia.",
                 rating: 4.6,
@@ -445,7 +447,7 @@ class SpainlyApp {
                 province: "asturias",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Playa_de_Artedo_Cudillero.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474137/pexels-photo-1474137.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa rústica en el concejo de Cudillero",
                 fullDescription: "La Concha de Artedo es una playa virgen rodeada de acantilados verdes. Su arena fina y aguas tranquilas la hacen perfecta para relajarse. El paisaje asturiano con sus prados y vacias la hace especial.",
                 rating: 4.4,
@@ -457,7 +459,7 @@ class SpainlyApp {
                 province: "toledo",
                 category: "montaña",
                 schedule: "10-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Toledo_-_Montage_of_the_city.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474138/pexels-photo-1474138.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Ciudad de las tres culturas",
                 fullDescription: "Toledo es una ciudad museo donde convivieron cristianos, musulmanes y judíos. Sus calles estrechas, la catedral gótica, la sinagoga y los mezquitas la hacen única. El Alcázar domina el paisaje.",
                 rating: 4.7,
@@ -469,7 +471,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/La_Barroza_beach_chiclana.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474139/pexels-photo-1474139.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa de 8 km en Chiclana",
                 fullDescription: "La Playa de la Barrosa tiene 8 km de arena dorada. Sus aguas poco profundas la hacen perfecta para familias. El castillo de Sancti Petri en el mar le da un toque histórico espectacular.",
                 rating: 4.5,
@@ -481,7 +483,7 @@ class SpainlyApp {
                 province: "salamanca",
                 category: "montaña",
                 schedule: "10-20",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Plaza_Mayor_de_Salamanca.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474140/pexels-photo-1474140.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Ciudad dorada con la universidad más antigua",
                 fullDescription: "Salamanca es conocida como la Ciudad Dorada por el color de su piedra. Su universidad es una de las más antiguas de Europa. La Plaza Mayor es considerada la más bella de España.",
                 rating: 4.6,
@@ -493,7 +495,7 @@ class SpainlyApp {
                 province: "malaga",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Balcon_de_Europa_Nerja.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474141/pexels-photo-1474141.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playas y cuevas en la Costa del Sol",
                 fullDescription: "Nerja tiene playas espectaculares y las Cuevas de Nerja, un monumento natural impresionante. El Balcón de Europa ofrece vistas espectaculares del mar Mediterráneo y las montañas.",
                 rating: 4.4,
@@ -505,7 +507,7 @@ class SpainlyApp {
                 province: "lugo",
                 category: "montaña",
                 schedule: "10-19",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Santiago_de_Compostela_-_Cathedral.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474142/pexels-photo-1474142.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Destino del Camino de Santiago",
                 fullDescription: "Santiago de Compostela es una de las ciudades más sagradas del cristianismo. Su catedral barroca es la meta del Camino. Las calles del casco antiguo están llenas de historia y espiritualidad.",
                 rating: 4.8,
@@ -517,7 +519,7 @@ class SpainlyApp {
                 province: "cadiz",
                 category: "playa",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Playa_de_los_Lances_Tarifa.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474143/pexels-photo-1474143.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Playa donde se descubrió América",
                 fullDescription: "Los Lances en Tarifa es donde se dice que se avistó América por primera vez. Es el punto más al sur de Europa, donde se juntan el Mediterráneo y el Atlántico. Perfecta para deportes acuáticos.",
                 rating: 4.3,
@@ -529,7 +531,7 @@ class SpainlyApp {
                 province: "asturias",
                 category: "montaña",
                 schedule: "09-18",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Naranjo_de_Bulnes_-_Picos_de_Europa.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474144/pexels-photo-1474144.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Parque nacional con picos imponentes",
                 fullDescription: "Los Picos de Europa son un paraíso para montañistas. Sus picos como el Naranjo de Bulnes o el Torrecerredo superan los 2.500 metros. El lago Enol y la Vega de Enol crean paisajes espectaculares.",
                 rating: 4.9,
@@ -541,7 +543,7 @@ class SpainlyApp {
                 province: "almeria",
                 category: "playa",
                 schedule: "08-20",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cabo_de_Gata_-_Playa_de_los_Muertos.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474145/pexels-photo-1474145.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "Parque natural con calas vírgenes y aguas cristalinas",
                 fullDescription: "El Cabo de Gata-Níjar es un parque natural situado en el extremo más oriental de la provincia de Almería. Es uno de los espacios naturales de mayor valor ecológico de la costa mediterránea occidental.",
                 rating: 4.7,
@@ -553,7 +555,7 @@ class SpainlyApp {
                 province: "madrid",
                 category: "montaña",
                 schedule: "24h",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Gran_Via_Madrid_2015.jpg/400/300.jpg",
+                image: "https://images.pexels.com/photos/1474146/pexels-photo-1474146.jpeg?auto=compress&cs=tinysrgb&w=1200",
                 description: "La Broadway de Madrid",
                 fullDescription: "La Gran Vía es la arteria comercial y de ocio de Madrid. Sus edificios de principios del siglo XX, teatros, cines y tiendas la hacen la calle más animada de la capital. Iluminada de noche es espectacular.",
                 rating: 4.4,
@@ -668,6 +670,43 @@ class SpainlyApp {
         
         console.log('Listeners de perfil configurados');
     }
+
+    private setupHomeSearchListeners(): void {
+        console.log('Configurando listeners de búsqueda del home...');
+        
+        // Configurar el formulario de búsqueda del home
+        const homeSearchForm = document.getElementById('homeSearchForm') as HTMLFormElement;
+        if (homeSearchForm) {
+            homeSearchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleHomeSearchForm();
+            });
+        }
+        
+        // Configurar inputs para búsqueda en tiempo real
+        const homeSearchInput = document.getElementById('homeSearchInput') as HTMLInputElement;
+        const homeProvinceFilter = document.getElementById('homeProvinceFilter') as HTMLSelectElement;
+        const homeCategoryFilter = document.getElementById('homeCategoryFilter') as HTMLSelectElement;
+        const homeScheduleFilter = document.getElementById('homeScheduleFilter') as HTMLSelectElement;
+        
+        if (homeSearchInput) {
+            homeSearchInput.addEventListener('input', () => this.handleHomeSearchForm());
+        }
+        
+        if (homeProvinceFilter) {
+            homeProvinceFilter.addEventListener('change', () => this.handleHomeSearchForm());
+        }
+        
+        if (homeCategoryFilter) {
+            homeCategoryFilter.addEventListener('change', () => this.handleHomeSearchForm());
+        }
+        
+        if (homeScheduleFilter) {
+            homeScheduleFilter.addEventListener('change', () => this.handleHomeSearchForm());
+        }
+        
+        console.log('Listeners de búsqueda del home configurados');
+    }
     
     private setupThemeToggle(): void {
         const themeToggle = document.getElementById('themeToggle');
@@ -773,22 +812,146 @@ class SpainlyApp {
         this.state.updateCountersDisplay();
     }
 
-    private renderHome(): void {
-        const container = document.getElementById('app');
+    public renderHome(): void {
+        const container = document.getElementById('mainContent');
         if (!container) return;
 
         const topPlaces = this.state.getTopRatedPlaces(6);
         const allPlaces = this.state.getPlaces();
 
+        console.log('Renderizando home con bienvenida compacta -', new Date().toISOString());
         container.innerHTML = `
             <main class="container mx-auto px-4 py-8">
+                <!-- Bienvenida Simple -->
+                <div class="mb-8 text-center">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+                        <i class="fas fa-flag-espana mr-3 text-spain-red"></i>
+                        Bienvenido a Spainly
+                    </h1>
+                    <p class="text-lg md:text-xl mb-6 text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Descubre los tesoros de España: playas espectaculares, monumentos impresionantes y paisajes únicos
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marked-alt text-spain-red"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">40+ Destinos</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-star text-spain-yellow"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Valoraciones Reales</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-heart text-spain-red"></i>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">Guarda Favoritos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra de Búsqueda y Filtros -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+                        <i class="fas fa-search text-spain-red mr-3"></i>
+                        Busca tu Próximo Destino
+                    </h2>
+                    <div id="homeSearchBar" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+                <form id="homeSearchForm" class="space-y-4">
+                    <!-- Búsqueda principal -->
+                    <div class="relative">
+                        <input
+                            type="text"
+                            id="homeSearchInput"
+                            name="query"
+                            placeholder="Buscar lugares, provincias, actividades..."
+                            class="w-full px-4 py-3 pl-12 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white"
+                        />
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Provincia -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2"></i>Provincia
+                            </label>
+                            <select
+                                name="province"
+                                id="homeProvinceFilter"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white"
+                            >
+                                <option value="">Todas las provincias</option>
+                                <option value="barcelona">Barcelona</option>
+                                <option value="madrid">Madrid</option>
+                                <option value="sevilla">Sevilla</option>
+                                <option value="valencia">Valencia</option>
+                                <option value="bilbao">Bilbao</option>
+                                <option value="granada">Granada</option>
+                                <option value="cordoba">Córdoba</option>
+                                <option value="malaga">Málaga</option>
+                                <option value="alicante">Alicante</option>
+                                <option value="murcia">Murcia</option>
+                                <option value="guipuzcoa">Guipúzcoa</option>
+                                <option value="pontevedra">Pontevedra</option>
+                                <option value="asturias">Asturias</option>
+                                <option value="tenerife">Tenerife</option>
+                                <option value="baleares">Baleares</option>
+                            </select>
+                        </div>
+
+                        <!-- Categoría -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-filter mr-2"></i>Categoría
+                            </label>
+                            <select
+                                name="category"
+                                id="homeCategoryFilter"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white"
+                            >
+                                <option value="">Todas las categorías</option>
+                                <option value="playa">🏖️ Playas</option>
+                                <option value="montaña">🏔️ Montañas</option>
+                                <option value="monumento">🏛️ Monumentos</option>
+                            </select>
+                        </div>
+
+                        <!-- Horario -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-clock mr-2"></i>Horario
+                            </label>
+                            <select
+                                name="schedule"
+                                id="homeScheduleFilter"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white"
+                            >
+                                <option value="">Cualquier horario</option>
+                                <option value="24h">24 horas</option>
+                                <option value="08-20">Mañana (8-20h)</option>
+                                <option value="09-20">Completo (9-20h)</option>
+                                <option value="10-18">Oficina (10-18h)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botón de búsqueda -->
+                    <button
+                        type="submit"
+                        class="w-full px-6 py-3 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors"
+                    >
+                        <i class="fas fa-search mr-2"></i>Buscar
+                    </button>
+                </form>
+            </div>
+                </section>
+
                 <section class="mb-12">
                     <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
                         <i class="fas fa-star text-spain-yellow mr-3"></i>
                         Lugares Recomendados
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${topPlaces.map(place => this.createPlaceCard(place)).join('')}
+                        ${topPlaces.map(place => this.createSimplePlaceCard(place)).join('')}
                     </div>
                 </section>
                 
@@ -798,10 +961,39 @@ class SpainlyApp {
                         Todos los Lugares
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="placesContainer">
-                        ${allPlaces.map(place => this.createPlaceCard(place)).join('')}
+                        ${allPlaces.map(place => this.createSimplePlaceCard(place)).join('')}
                     </div>
                 </section>
             </main>
+        `;
+        
+        // Reconfigurar listeners después de renderizar
+        this.setupModalListeners();
+        this.setupSearchListeners();
+        this.setupHomeSearchListeners();
+    }
+
+    private createSimplePlaceCard(place: Place): string {
+        return `
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <img src="${place.image}" alt="${place.name}" class="w-full h-48 object-cover" onerror="this.src='https://picsum.photos/seed/${place.id}/400/300.jpg'">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${place.name}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${place.description}</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                        <span>⭐ ${place.rating} (${place.reviews.toLocaleString()})</span>
+                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs">${place.category}</span>
+                    </div>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="flex-1 px-3 py-1 bg-spain-yellow text-gray-800 text-sm rounded hover:bg-yellow-400 transition-colors">
+                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                        </button>
+                        <button class="px-3 py-1 bg-spain-red text-white text-sm rounded hover:bg-red-600 transition-colors">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         `;
     }
 
@@ -844,7 +1036,7 @@ class SpainlyApp {
 
     
     private renderSearch(): void {
-        const container = document.getElementById('app');
+        const container = document.getElementById('mainContent');
         if (!container) return;
 
         container.innerHTML = `
@@ -866,7 +1058,7 @@ class SpainlyApp {
 
     
     private renderFavorites(): void {
-        const container = document.getElementById('app');
+        const container = document.getElementById('mainContent');
         if (!container) return;
 
         const favoritePlaces = this.state.getFavoritePlaces();
@@ -1011,7 +1203,7 @@ class SpainlyApp {
             </section>
         `;
 
-        document.getElementById('reportsBackBtn')?.addEventListener('click', () => window.location.reload());
+        document.getElementById('reportsBackBtn')?.addEventListener('click', () => this.renderHome());
         document.querySelectorAll<HTMLButtonElement>('.report-detail-btn').forEach((button) => {
             button.addEventListener('click', () => {
                 const reportId = button.getAttribute('data-report-id');
@@ -1208,7 +1400,7 @@ class SpainlyApp {
         const place = this.state.getPlaceById(placeId);
         if (!place) return;
 
-        const container = document.getElementById('app');
+        const container = document.getElementById('mainContent');
         if (!container) return;
 
         const isFavorite = this.state.isFavorite(placeId);
@@ -1338,6 +1530,76 @@ class SpainlyApp {
         this.state.showMessage('conseguido', 'Búsqueda: Función en desarrollo');
     }
 
+    private handleHomeSearchForm(): void {
+        console.log('Ejecutando handleHomeSearchForm...');
+        
+        const homeSearchInput = document.getElementById('homeSearchInput') as HTMLInputElement;
+        const homeProvinceFilter = document.getElementById('homeProvinceFilter') as HTMLSelectElement;
+        const homeCategoryFilter = document.getElementById('homeCategoryFilter') as HTMLSelectElement;
+        const homeScheduleFilter = document.getElementById('homeScheduleFilter') as HTMLSelectElement;
+        
+        const query = homeSearchInput?.value || '';
+        const province = homeProvinceFilter?.value || '';
+        const category = homeCategoryFilter?.value || '';
+        const schedule = homeScheduleFilter?.value || '';
+        
+        const filters: FilterOptions = {};
+        if (province) filters.province = province;
+        if (category) filters.category = category as 'playa' | 'montaña' | 'monumento';
+        if (schedule) filters.schedule = schedule;
+        
+        console.log('Búsqueda desde home form:', { query, filters });
+        
+        // Filtrar lugares y actualizar la vista del home
+        const allPlaces = this.state.getPlaces();
+        let filteredPlaces = allPlaces;
+        
+        // Aplicar filtros
+        if (query) {
+            filteredPlaces = filteredPlaces.filter(place => 
+                place.name.toLowerCase().includes(query.toLowerCase()) ||
+                place.description.toLowerCase().includes(query.toLowerCase()) ||
+                place.fullDescription.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+        
+        if (filters.province) {
+            filteredPlaces = filteredPlaces.filter(place => place.province === filters.province);
+        }
+        
+        if (filters.category) {
+            filteredPlaces = filteredPlaces.filter(place => place.category === filters.category);
+        }
+        
+        if (filters.schedule) {
+            filteredPlaces = filteredPlaces.filter(place => place.schedule === filters.schedule);
+        }
+        
+        // Actualizar los contenedores con los resultados filtrados
+        const placesContainer = document.getElementById('placesContainer');
+        
+        if (placesContainer) {
+            if (filteredPlaces.length === 0) {
+                placesContainer.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">
+                            No se encontraron lugares
+                        </h3>
+                        <p class="text-gray-500 dark:text-gray-500">
+                            Intenta con otros filtros o términos de búsqueda
+                        </p>
+                    </div>
+                `;
+            } else {
+                placesContainer.innerHTML = filteredPlaces.map(place => this.createSimplePlaceCard(place)).join('');
+            }
+        }
+        
+        // Reconfigurar listeners
+        this.setupModalListeners();
+    }
+
     private showFavorites(): void {
         console.log('Mostrando favoritos...');
         this.state.showMessage('conseguido', 'Favoritos: Función en desarrollo');
@@ -1359,11 +1621,13 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         const app = SpainlyApp.getInstance();
         window.app = app;
+        app.renderHome(); // Renderizar el home al iniciar
         console.log('Spainly App inicializada correctamente');
     });
 } else {
     const app = SpainlyApp.getInstance();
     window.app = app;
+    app.renderHome(); // Renderizar el home al iniciar
     console.log('Spainly App inicializada correctamente');
 }
 
