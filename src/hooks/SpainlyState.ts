@@ -170,9 +170,18 @@ export class SpainlyState {
     // Métodos de utilidad
     public updateCountersDisplay(): void {
         Object.entries(this.counters).forEach(([key, value]) => {
-            const element = document.getElementById(`${key}Counter`);
-            if (element) {
-                element.textContent = value.toString();
+            // Para el usuario, actualizar solo el contador numérico, no el icono
+            if (key === 'user') {
+                const countElement = document.getElementById('userCount');
+                if (countElement) {
+                    countElement.textContent = value.toString();
+                }
+            } else {
+                // Para otros contadores, actualizar el elemento completo
+                const element = document.getElementById(`${key}Counter`);
+                if (element) {
+                    element.textContent = value.toString();
+                }
             }
         });
     }

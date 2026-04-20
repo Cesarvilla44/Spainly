@@ -51,7 +51,7 @@
                     </button>
                     
                     <!-- Botón modo oscuro -->
-                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" onclick="toggleTheme()">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline"></i>
                     </button>
@@ -61,7 +61,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main id="mainContent" class="container mx-auto px-4 py-8">
         <!-- Mensaje de bienvenida -->
         <section class="text-center mb-12">
             <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
@@ -204,7 +204,7 @@
     <!-- Modal de Registro -->
     <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button data-close-modal="registerModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button id="closeRegisterModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
@@ -224,7 +224,7 @@
                     <input type="password" id="regPassword" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
                 </div>
                 <div class="flex space-x-4">
-                    <button type="submit" class="flex-1 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <button type="submit" id="registerSubmitBtn" class="flex-1 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
                         Registrarse
                     </button>
                     <button type="button" onclick="closeModal('registerModal')" class="flex-1 px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
@@ -238,7 +238,7 @@
     <!-- Modal de Inicio de Sesión -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button data-close-modal="loginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
@@ -254,7 +254,7 @@
                     <input type="password" id="loginPassword" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
                 </div>
                 <div class="flex space-x-4">
-                    <button type="submit" class="flex-1 px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                    <button type="submit" id="loginSubmitBtn" class="flex-1 px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
                         Iniciar Sesión
                     </button>
                     <button type="button" onclick="closeModal('loginModal')" class="flex-1 px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
@@ -273,5 +273,269 @@
 
     <!-- Scripts -->
     <script type="module" src="dist/app.js"></script>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+
+            if (isDark) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showMessage(text) {
+            const message = document.getElementById('conseguidoMessage');
+            const messageText = document.getElementById('conseguidoText');
+            if (!message || !messageText) return;
+
+            messageText.textContent = text;
+            message.classList.remove('hidden');
+            setTimeout(() => message.classList.add('hidden'), 2500);
+        }
+
+        function openReportsPage() {
+            const reportsHTML = `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Reportajes - Spainly</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                    <script>
+                        tailwind.config = {
+                            darkMode: 'class',
+                            theme: {
+                                extend: {
+                                    colors: {
+                                        'spain-red': '#c41e3a',
+                                        'spain-yellow': '#f1bf00'
+                                    }
+                                }
+                            }
+                        };
+                    <\/script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                </head>
+                <body class="bg-gray-50">
+                    <div class="container mx-auto px-4 py-8">
+                        <button onclick="window.close()" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700">
+                            <i class="fas fa-arrow-left mr-2"></i>Cerrar
+                        </button>
+
+                        <h1 class="text-3xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-newspaper text-blue-600 mr-3"></i>Reportajes
+                        </h1>
+
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <p class="text-gray-600 mb-4">Descubre los mejores reportajes sobre los lugares mas impresionantes de Espana.</p>
+                            <div class="space-y-4">
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <h3 class="font-bold text-gray-800 mb-2">Las Maravillas de Gaudi</h3>
+                                    <p class="text-gray-600">Un recorrido por las obras mas emblematicas del arquitecto modernista catalan.</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <h3 class="font-bold text-gray-800 mb-2">Playas Paradisiacas</h3>
+                                    <p class="text-gray-600">Descubre las playas mas bonitas de la costa espanola.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            const win = window.open('', '_blank');
+            if (win) {
+                win.document.open();
+                win.document.write(reportsHTML);
+                win.document.close();
+            }
+        }
+
+        let homeMainContent = '';
+
+        function restoreHomeContent() {
+            const mainContent = document.getElementById('mainContent');
+            if (!mainContent || !homeMainContent) return;
+            mainContent.innerHTML = homeMainContent;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openAboutPage() {
+            const mainContent = document.getElementById('mainContent');
+            if (!mainContent) return;
+
+            if (!homeMainContent) {
+                homeMainContent = mainContent.innerHTML;
+            }
+
+            mainContent.innerHTML = `
+                <section class="max-w-6xl mx-auto">
+                    <button id="backToHomeBtn" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                    </button>
+
+                    <div class="rounded-2xl shadow-xl p-8 md:p-10 mb-8 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                            <div>
+                                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white mb-3">
+                                    <i class="fas fa-info-circle text-spain-red mr-3"></i>Sobre mí
+                                </h2>
+                                <p class="text-lg text-gray-600 dark:text-gray-300">
+                                    Una visión completa del proyecto y de su propósito
+                                </p>
+                            </div>
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-spain-red to-spain-yellow flex items-center justify-center shadow-lg">
+                                <i class="fas fa-laptop-code text-white text-4xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8 mb-8">
+                        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Qué pretende Spainly</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                                Spainly pretende ayudar al usuario a descubrir los maravillosos lugares y joyas de España en un solo espacio digital.
+                                No solo muestra destinos turísticos conocidos, también busca dar visibilidad a rincones con valor cultural, histórico
+                                y natural para que cada viaje sea más completo, informado y especial.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                                La plataforma está pensada para facilitar la exploración por categorías, preferencias y contexto del viaje.
+                                El objetivo es que cualquier persona pueda inspirarse, planificar y disfrutar con confianza de experiencias auténticas
+                                en todo el territorio, desde grandes ciudades hasta pequeños enclaves con encanto.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                En resumen, Spainly funciona como una guía moderna para conectar al usuario con la riqueza de España:
+                                patrimonio, paisajes, gastronomía y cultura, de forma clara, visual y accesible.
+                            </p>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Datos personales</h3>
+                            <div class="flex flex-col items-start gap-5">
+                                <a href="https://github.com/Cesarvilla44" target="_blank" rel="noopener noreferrer"
+                                   class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://github.com/Cesarvilla44/Spainly" target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center px-5 py-2 bg-spain-yellow text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors">
+                                    <i class="fas fa-folder-open mr-2"></i>Ver proyecto
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Tecnologías utilizadas</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4">
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-html5 text-orange-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">HTML 5</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-wind text-cyan-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">CSS Tailwind</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-code text-blue-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">TypeScript</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-react text-sky-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">React</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-node-js text-green-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Node</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-cloud text-gray-700 dark:text-gray-200 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Vercel</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-trello text-blue-600 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Trello</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl shadow-xl p-8 bg-gradient-to-r from-spain-red to-spain-yellow text-white">
+                        <h3 class="text-2xl font-bold mb-3">Compromiso del proyecto</h3>
+                        <p class="leading-relaxed">
+                            Este proyecto se centra en ofrecer una experiencia clara, útil y agradable para el usuario, ayudándole a descubrir
+                            las joyas de España de manera intuitiva y visual. Spainly sigue creciendo con la misma prioridad: aportar valor real
+                            a cada persona que quiera explorar el país.
+                        </p>
+                    </div>
+                </section>
+            `;
+
+            const backToHomeBtn = document.getElementById('backToHomeBtn');
+            backToHomeBtn?.addEventListener('click', restoreHomeContent);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Inicializar tema y listeners de botones
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+
+            const registerBtn = document.getElementById('registerBtn');
+            const loginBtn = document.getElementById('loginBtn');
+            const reportsBtn = document.getElementById('reportsBtn');
+            const aboutBtn = document.getElementById('aboutBtn');
+            const closeRegisterModal = document.getElementById('closeRegisterModal');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const registerForm = document.getElementById('registerForm');
+            const loginForm = document.getElementById('loginForm');
+
+            registerBtn?.addEventListener('click', () => openModal('registerModal'));
+            loginBtn?.addEventListener('click', () => openModal('loginModal'));
+            closeRegisterModal?.addEventListener('click', () => closeModal('registerModal'));
+            closeLoginModal?.addEventListener('click', () => closeModal('loginModal'));
+
+            reportsBtn?.addEventListener('click', () => {
+                if (window.app && typeof window.app.goToReports === 'function') {
+                    window.app.goToReports();
+                    return;
+                }
+                openReportsPage();
+            });
+            aboutBtn?.addEventListener('click', () => openAboutPage());
+
+            registerForm?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                closeModal('registerModal');
+                showMessage('Registro: función en desarrollo');
+            });
+
+            loginForm?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                closeModal('loginModal');
+                showMessage('Login: función en desarrollo');
+            });
+        });
+    </script>
 </body>
 </html>

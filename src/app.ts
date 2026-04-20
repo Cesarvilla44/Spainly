@@ -4,6 +4,13 @@ import { PlaceCard } from './components/PlaceCard.js';
 import { SearchBar } from './components/SearchBar.js';
 import { Modal } from './components/Modal.js';
 
+// Declaración global para TypeScript
+declare global {
+    interface Window {
+        app: SpainlyApp;
+    }
+}
+
 // Clase optimizada con TypeScript y componentes modulares
 class SpainlyApp {
     private static instance: SpainlyApp;
@@ -64,7 +71,7 @@ class SpainlyApp {
 
     private getApiUrl(endpoint: string): string {
         const baseUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:3000' 
+            ? 'http://localhost:3001' 
             : '';
         return `${baseUrl}${endpoint}`;
     }
@@ -558,20 +565,20 @@ class SpainlyApp {
     }
 
     private setupEventListeners(): void {
-        document.addEventListener('click', this.handleGlobalClick.bind(this));
-        document.addEventListener('submit', this.handleGlobalSubmit.bind(this));
-        this.setupNavigationListeners();
+        // Configurar todos los listeners inmediatamente
         this.setupThemeToggle();
+        this.setupSimpleButtonListeners();
+        this.setupModalListeners();
+        this.setupSearchListeners();
+        this.setupProfileListeners();
+        
+        console.log('Event listeners configurados correctamente');
     }
 
     private setupNavigationListeners(): void {
         console.log('Configurando event listeners de navegación...');
         
-        // Configurar botones de navegación principales
-        this.setupButton('searchBtn', () => this.goToSearch());
-        this.setupButton('favoritesBtn', () => this.goToFavorites());
-        this.setupButton('ratingsBtn', () => this.goToRatings());
-        this.setupButton('profileBtn', () => this.goToProfile());
+        // Configurar solo los botones que existen en el HTML
         this.setupButton('registerBtn', () => this.openModal('registerModal'));
         this.setupButton('loginBtn', () => this.openModal('loginModal'));
         this.setupButton('reportsBtn', () => this.goToReports());
@@ -580,24 +587,101 @@ class SpainlyApp {
         console.log('Event listeners configurados');
     }
 
-    private setupButton(buttonId: string, clickHandler: () => void): void {
-        const btn = document.getElementById(buttonId);
-        if (btn) {
-            btn.addEventListener('click', (e) => {
+    private setupSimpleButtonListeners(): void {
+        console.log('Configurando botones principales...');
+        
+        // Configurar botones principales con onclick directo
+        this.setupButton('registerBtn', () => this.openModal('registerModal'));
+        this.setupButton('loginBtn', () => this.openModal('loginModal'));
+        this.setupButton('reportsBtn', () => this.goToReports());
+        this.setupButton('aboutBtn', () => this.goToAbout());
+        
+        console.log('Botones principales configurados');
+    }
+    
+    private setupButton(buttonId: string, callback: () => void): void {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            // Eliminar listeners previos
+            const newButton = button.cloneNode(true);
+            button.parentNode?.replaceChild(newButton, button);
+            
+            // Añadir listener único
+            newButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log(`Botón ${buttonId} clickeado`);
-                clickHandler();
+                e.stopPropagation();
+                callback();
             });
+            
             console.log(`Botón ${buttonId} configurado correctamente`);
         } else {
             console.warn(`Botón ${buttonId} no encontrado`);
         }
     }
 
+    private setupModalListeners(): void {
+        console.log('Configurando listeners de modales...');
+        
+        // Botones para cerrar modales
+        this.setupButton('closeRegisterModal', () => this.closeModal('registerModal'));
+        this.setupButton('closeLoginModal', () => this.closeModal('loginModal'));
+        
+        // Botones de acción en modales
+        this.setupButton('registerSubmitBtn', () => this.handleRegister());
+        this.setupButton('loginSubmitBtn', () => this.handleLogin());
+        
+        console.log('Listeners de modales configurados');
+    }
+    
+    private setupSearchListeners(): void {
+        console.log('Configurando listeners de búsqueda...');
+        
+        // Botones de la barra de navegación
+        this.setupButton('searchBtn', () => this.handleSearch());
+        this.setupButton('favoritesBtn', () => this.showFavorites());
+        this.setupButton('ratingsBtn', () => this.showRatings());
+        
+        // Inputs de búsqueda y filtros
+        const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+        const provinceFilter = document.getElementById('provinceFilter') as HTMLSelectElement;
+        const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', () => this.handleSearch());
+        }
+        
+        if (provinceFilter) {
+            provinceFilter.addEventListener('change', () => this.handleSearch());
+        }
+        
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', () => this.handleSearch());
+        }
+        
+        console.log('Listeners de búsqueda configurados');
+    }
+    
+    private setupProfileListeners(): void {
+        console.log('Configurando listeners de perfil...');
+        
+        this.setupButton('profileBtn', () => this.showProfile());
+        
+        console.log('Listeners de perfil configurados');
+    }
+    
     private setupThemeToggle(): void {
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
+            // Eliminar event listeners previos para evitar duplicación
+            const newThemeToggle = themeToggle.cloneNode(true);
+            themeToggle.parentNode?.replaceChild(newThemeToggle, themeToggle);
+            
+            // Añadir event listener único
+            newThemeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleTheme();
+            });
         }
     }
 
@@ -732,22 +816,7 @@ class SpainlyApp {
         return placeCard.render();
     }
 
-    public openModal(modalId: string): void {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-
-    public closeModal(modalId: string): void {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-    }
-
+    
     // Métodos de navegación
     public goToSearch(): void {
         this.currentView = 'search';
@@ -773,18 +842,7 @@ class SpainlyApp {
         window.location.hash = '#profile';
     }
 
-    public goToReports(): void {
-        this.currentView = 'reports';
-        this.renderCurrentView();
-        window.location.hash = '#reports';
-    }
-
-    public goToAbout(): void {
-        this.currentView = 'about';
-        this.renderCurrentView();
-        window.location.hash = '#about';
-    }
-
+    
     private renderSearch(): void {
         const container = document.getElementById('app');
         if (!container) return;
@@ -806,26 +864,7 @@ class SpainlyApp {
         this.searchBar.setupEventListeners();
     }
 
-    private handleSearch(query: string, filters: FilterOptions): void {
-        const results = this.state.searchPlaces(query, filters);
-        const resultsContainer = document.getElementById('searchResults');
-        
-        if (resultsContainer) {
-            if (results.length === 0) {
-                resultsContainer.innerHTML = `
-                    <div class="col-span-full text-center py-12">
-                        <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
-                        <p class="text-xl text-gray-600 dark:text-gray-400">
-                            No se encontraron resultados para "${query}"
-                        </p>
-                    </div>
-                `;
-            } else {
-                resultsContainer.innerHTML = results.map(place => this.createPlaceCard(place)).join('');
-            }
-        }
-    }
-
+    
     private renderFavorites(): void {
         const container = document.getElementById('app');
         if (!container) return;
@@ -876,52 +915,143 @@ class SpainlyApp {
     }
 
     private showReportsPage(): void {
-        const reportsHTML = `
-            <!DOCTYPE html>
-            <html lang="es">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Reportajes - Spainly</title>
-                <script src="https://cdn.tailwindcss.com"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            </head>
-            <body class="bg-gray-50 dark:bg-gray-900">
-                <div class="container mx-auto px-4 py-8">
-                    <button onclick="history.back()" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700">
-                        <i class="fas fa-arrow-left mr-2"></i>Volver
-                    </button>
-                    
-                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
-                        <i class="fas fa-newspaper text-blue-600 mr-3"></i>Reportajes
-                    </h1>
-                    
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">Descubre los mejores reportajes sobre los lugares más impresionantes de España.</p>
-                        <div class="space-y-4">
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Las Maravillas de Gaudí</h3>
-                                <p class="text-gray-600 dark:text-gray-300">Un recorrido por las obras más emblemáticas del arquitecto modernista catalán.</p>
-                            </div>
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Playas Paradisíacas</h3>
-                                <p class="text-gray-600 dark:text-gray-300">Descubre las playas más bonitas de la costa española.</p>
-                            </div>
-                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                                <h3 class="font-bold text-gray-800 dark:text-white mb-2">Tesoros Históricos</h3>
-                                <p class="text-gray-600 dark:text-gray-300">Explora los monumentos y sitios históricos que han marcado la historia de España.</p>
-                            </div>
-                        </div>
-                    </div>
+        const reports = [
+            {
+                id: 'ordesa',
+                title: 'Ordesa y Monte Perdido',
+                icon: 'fa-mountain',
+                summary: 'Parque nacional pirenaico con valles glaciares y cascadas.',
+                mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Parque+Nacional+de+Ordesa+y+Monte+Perdido',
+                cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Valley_of_Ordesa,_Ordesa_y_Monte_Perdido_National_Park,_Spain.jpg',
+                images: [
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Valley_of_Ordesa,_Ordesa_y_Monte_Perdido_National_Park,_Spain.jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Ordesa_Valley_4,_Ordesa_y_Monte_Perdido_National_Park,_Spain.jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Tozal_del_Mallo_Panorama.jpg'
+                ],
+                paragraphs: [
+                    'Ordesa y Monte Perdido es uno de los parques nacionales más impactantes de España por su relieve abrupto, sus bosques de hayas y su enorme valor geológico. El valle principal presenta paredes verticales, fajas naturales y un trazado de origen glaciar que convierte cada tramo en una clase abierta de geografía y naturaleza.',
+                    'La ruta clásica hacia la Cola de Caballo es una de las más recomendadas para quien visita la zona por primera vez. A lo largo del recorrido aparecen cascadas muy conocidas, zonas de bosque con sombra y miradores naturales desde los que se contempla la inmensidad del valle.',
+                    'Para senderistas con mayor experiencia, las fajas altas y los itinerarios de desnivel ofrecen una perspectiva aún más espectacular. Estas rutas exigen planificación previa, equipamiento adecuado y consulta de condiciones meteorológicas, especialmente fuera de temporada estival.',
+                    'La biodiversidad del parque es otro de sus grandes valores. Se pueden observar aves rapaces, flora de alta montaña y distintos ecosistemas en pocos kilómetros, algo poco habitual en otros destinos. Esta variedad hace que el parque sea ideal tanto para excursionismo como para fotografía de naturaleza.',
+                    'Si buscas una escapada completa, la zona combina senderismo, paisaje, tranquilidad y patrimonio local en los pueblos cercanos del Pirineo aragonés. Es un lugar que funciona igual de bien para una visita de un día como para una estancia más larga centrada en rutas de montaña.'
+                ]
+            },
+            {
+                id: 'cies',
+                title: 'Las Islas Cíes',
+                icon: 'fa-water',
+                summary: 'Archipiélago protegido con playas de arena blanca y aguas claras.',
+                mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Islas+C%C3%ADes',
+                cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes-Playa_de_Rodas_(9226466307).jpg',
+                images: [
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes-Playa_de_Rodas_(9226466307).jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Illas_Cíes,_pontevedra,_galiza.jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes_desde_el_aire.jpg'
+                ],
+                paragraphs: [
+                    'Las Islas Cíes forman parte del Parque Nacional Marítimo-Terrestre de las Islas Atlánticas y son uno de los espacios naturales más especiales de Galicia. Su acceso está regulado para conservar el equilibrio ambiental, por eso es importante planificar la visita con antelación en temporada alta.',
+                    'La playa de Rodas es el ícono principal del archipiélago por su forma de media luna y el contraste entre aguas limpias, arena clara y pinares. Aun así, la experiencia no se limita al baño: recorrer las sendas de las islas permite descubrir miradores, acantilados y zonas de enorme valor ecológico.',
+                    'Uno de los atractivos más apreciados es la red de senderos hacia faros y puntos elevados. Desde esos lugares se obtiene una vista panorámica del océano y de la ría, ideal para quienes disfrutan de fotografía de paisaje y observación de aves marinas.',
+                    'Como reportaje de destino, Cíes destaca por la combinación entre belleza visual y modelo de protección natural. Es un ejemplo claro de turismo responsable: menos masificación, mayor calidad de visita y respeto por el entorno.',
+                    'Si quieres aprovechar bien el viaje, conviene combinar tiempo de playa, paseo por senderos y tramos de descanso para observar el paisaje con calma. Las Cíes no son un destino para ir con prisa, sino para recorrerlo de forma pausada.'
+                ]
+            },
+            {
+                id: 'donana',
+                title: 'Parque Nacional de Doñana',
+                icon: 'fa-feather',
+                summary: 'Humedales y dunas en uno de los ecosistemas más valiosos de Europa.',
+                mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Parque+Nacional+de+Do%C3%B1ana',
+                cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Parque_Nacional_de_Doñana._La_Rocina.jpg',
+                images: [
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Parque_Nacional_de_Doñana._La_Rocina.jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Doñana_1986_09.jpg',
+                    'https://commons.wikimedia.org/wiki/Special:FilePath/Centro_de_Visitantes_Poblado_de_la_Plancha_20210610_43.jpg'
+                ],
+                paragraphs: [
+                    'Doñana es una referencia internacional en biodiversidad por la amplitud y variedad de sus ecosistemas: marismas, dunas móviles, pinares, cotos y zonas de transición. Esta riqueza ambiental convierte al parque en uno de los puntos clave para especies residentes y aves migratorias.',
+                    'La dinámica estacional marca totalmente la experiencia del visitante. Según la época del año, cambian los niveles de agua, la presencia de aves y el paisaje dominante. Por eso, cada visita a Doñana puede ser muy distinta incluso recorriendo áreas parecidas.',
+                    'Desde el punto de vista educativo, Doñana permite entender de forma clara la relación entre conservación, clima, uso del territorio y equilibrio de ecosistemas. Es un destino ideal para turismo de naturaleza, fotografía y actividades interpretativas.',
+                    'También es un ejemplo de gestión ambiental compleja, donde conviven protección estricta, investigación científica y experiencias de visita guiada. Esta combinación hace que el parque tenga un valor único tanto para expertos como para público general.',
+                    'Si te interesa un reportaje de fondo sobre naturaleza española, Doñana ofrece contenido de enorme calidad: paisaje, fauna, procesos ecológicos y perspectiva de futuro sobre la preservación de espacios naturales.'
+                ]
+            }
+        ];
+
+        const container = document.getElementById('mainContent') ?? document.querySelector('main');
+        if (!container) return;
+
+        container.innerHTML = `
+            <section class="max-w-6xl mx-auto">
+                <button id="reportsBackBtn" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+                        <i class="fas fa-newspaper text-blue-600 mr-2"></i>Reportajes
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300">Haz clic en un reportaje para leer la version extensa con fotos reales.</p>
                 </div>
-            </body>
-            </html>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    ${reports.map((report) => `
+                        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                            <img src="${report.cover}" alt="${report.title}" class="w-full h-48 object-cover">
+                            <div class="p-5">
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                                    <i class="fas ${report.icon} text-spain-red mr-2"></i>${report.title}
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">${report.summary}</p>
+                                <button class="report-detail-btn px-4 py-2 bg-spain-yellow text-gray-900 rounded-lg hover:bg-yellow-400 transition-colors" data-report-id="${report.id}">
+                                    Leer reportaje
+                                </button>
+                            </div>
+                        </article>
+                    `).join('')}
+                </div>
+            </section>
         `;
-        
-        const newWindow = window.open();
-        if (newWindow) {
-            newWindow.document.write(reportsHTML);
-        }
+
+        document.getElementById('reportsBackBtn')?.addEventListener('click', () => window.location.reload());
+        document.querySelectorAll<HTMLButtonElement>('.report-detail-btn').forEach((button) => {
+            button.addEventListener('click', () => {
+                const reportId = button.getAttribute('data-report-id');
+                const selected = reports.find((r) => r.id === reportId);
+                if (!selected) return;
+
+                if (!container) return;
+                container.innerHTML = `
+                    <section class="max-w-5xl mx-auto">
+                        <button id="backToReportsBtn" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>Volver a reportajes
+                        </button>
+                        <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                            <img src="${selected.cover}" alt="${selected.title}" class="w-full h-72 object-cover">
+                            <div class="p-8">
+                                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
+                                    <i class="fas ${selected.icon} text-spain-red mr-2"></i>${selected.title}
+                                </h2>
+                                ${selected.paragraphs.map((paragraph) => `
+                                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">${paragraph}</p>
+                                `).join('')}
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                                    ${selected.images.map((image) => `
+                                        <img src="${image}" alt="${selected.title}" class="w-full h-48 object-cover rounded-lg shadow">
+                                    `).join('')}
+                                </div>
+                                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                    <a href="${selected.mapsUrl}" target="_blank" rel="noopener noreferrer"
+                                       class="inline-flex items-center px-5 py-3 bg-spain-yellow text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors">
+                                        <i class="fas fa-map-marker-alt mr-2"></i>Ver ubicación en Google Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+                `;
+
+                document.getElementById('backToReportsBtn')?.addEventListener('click', () => this.showReportsPage());
+            });
+        });
     }
 
     private showAboutPage(): void {
@@ -1149,46 +1279,78 @@ class SpainlyApp {
         this.state.toggleTheme();
     }
 
-    // Manejadores de eventos
-    private handleRegister(event: Event): void {
-        event.preventDefault();
-        const form = event.target as HTMLFormElement;
-        const formData = new FormData(form);
-        
-        const username = formData.get('username') as string;
-        const email = formData.get('email') as string;
-        const password = formData.get('password') as string;
-
-        if (username && email && password) {
-            this.state.login(username, email);
-            this.closeModal('registerModal');
-            this.state.showMessage('conseguido', 'Usuario registrado correctamente');
-            form.reset();
+    // Métodos esenciales para botones
+    private openModal(modalId: string): void {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            console.log(`Modal ${modalId} abierto`);
         }
     }
 
-    private handleLogin(event: Event): void {
-        event.preventDefault();
-        const form = event.target as HTMLFormElement;
-        const formData = new FormData(form);
-        
-        const email = formData.get('email') as string;
-        const password = formData.get('password') as string;
-
-        if (email && password) {
-            const username = email.split('@')[0] || email;
-            this.state.login(username, email);
-            this.closeModal('loginModal');
-            this.state.showMessage('conseguido', 'Sesión iniciada correctamente');
-            form.reset();
+    private closeModal(modalId: string): void {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            console.log(`Modal ${modalId} cerrado`);
         }
     }
-}
 
-// Declaración global para TypeScript
-declare global {
-    interface Window {
-        app: SpainlyApp;
+    private handleRegister(event?: Event): void {
+        if (event) {
+            event.preventDefault();
+        }
+        console.log('Procesando registro...');
+        this.state.showMessage('conseguido', 'Función de registro en desarrollo');
+    }
+
+    private handleLogin(event?: Event): void {
+        if (event) {
+            event.preventDefault();
+        }
+        console.log('Procesando login...');
+        this.state.showMessage('conseguido', 'Función de login en desarrollo');
+    }
+
+    public goToReports(): void {
+        this.showReportsPage();
+    }
+
+    private goToAbout(): void {
+        console.log('Navegando a sobre mí...');
+        this.state.showMessage('conseguido', 'Sobre mí: Función en desarrollo');
+    }
+
+    private handleSearch(query: string = '', filters: FilterOptions = {}): void {
+        if (!query) {
+            const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+            const provinceFilter = document.getElementById('provinceFilter') as HTMLSelectElement;
+            const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+            
+            query = searchInput?.value || '';
+            filters.province = provinceFilter?.value || '';
+            filters.category = categoryFilter?.value || '';
+        }
+        
+        console.log('Buscando:', { query, filters });
+        this.state.showMessage('conseguido', 'Búsqueda: Función en desarrollo');
+    }
+
+    private showFavorites(): void {
+        console.log('Mostrando favoritos...');
+        this.state.showMessage('conseguido', 'Favoritos: Función en desarrollo');
+    }
+
+    private showRatings(): void {
+        console.log('Mostrando valoraciones...');
+        this.state.showMessage('conseguido', 'Valoraciones: Función en desarrollo');
+    }
+
+    private showProfile(): void {
+        console.log('Mostrando perfil...');
+        this.state.showMessage('conseguido', 'Perfil: Función en desarrollo');
     }
 }
 
@@ -1202,7 +1364,7 @@ if (document.readyState === 'loading') {
 } else {
     const app = SpainlyApp.getInstance();
     window.app = app;
-    console.log('Spainly App inicializada correctamente (DOM ya listo)');
+    console.log('Spainly App inicializada correctamente');
 }
 
 export default SpainlyApp;
