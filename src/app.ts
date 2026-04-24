@@ -649,7 +649,7 @@ class SpainlyApp {
             
             aboutBtnMobile?.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
-                this.goToAbout();
+                this.goToAboutMobile();
             });
         }
     }
@@ -1328,153 +1328,111 @@ class SpainlyApp {
     }
 
     private showAboutPage(): void {
-        const aboutHTML = `
-            <!DOCTYPE html>
-            <html lang="es">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Sobre mí - Spainly</title>
-                <script src="https://cdn.tailwindcss.com"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            </head>
-            <body class="bg-gray-50 dark:bg-gray-900">
-                <div class="container mx-auto px-4 py-8">
-                    <button onclick="history.back()" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700">
-                        <i class="fas fa-arrow-left mr-2"></i>Volver
-                    </button>
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+        
+        mainContent.innerHTML = `
+            <section class="max-w-4xl mx-auto px-4 py-6 md:py-8">
+                <button onclick="window.app.restoreHomeContent()" class="mb-4 md:mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors flex items-center text-sm md:text-base">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+                
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6">
+                    <i class="fas fa-info-circle text-spain-red mr-2 md:mr-3"></i>Sobre mí
+                </h1>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6 space-y-4 md:space-y-6">
                     
-                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
-                        <i class="fas fa-info-circle text-gray-600 mr-3"></i>Sobre mí
-                    </h1>
+                    <!-- Descripción Personal -->
+                    <div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white mb-2 md:mb-3">
+                            <i class="fas fa-user text-blue-500 mr-2"></i>¿Quién soy?
+                        </h3>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Soy un desarrollador web apasionado por crear experiencias digitales que combinen funcionalidad y diseño. 
+                            Me especializo en frontend moderno y disfruto trabajando con tecnologías como TypeScript, React y Tailwind CSS. 
+                            Mi objetivo es construir aplicaciones que no solo funcionen bien, sino que también ofrezcan una experiencia excepcional al usuario.
+                        </p>
+                    </div>
                     
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 space-y-6">
-                        
-                        <!-- Descripción Personal -->
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                                <i class="fas fa-user text-blue-500 mr-2"></i>¿Quién soy?
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                                Soy un desarrollador web apasionado por crear experiencias digitales que combinen funcionalidad y diseño. 
-                                Me especializo en frontend moderno y disfruto trabajando con tecnologías como TypeScript, React y Tailwind CSS. 
-                                Mi objetivo es construir aplicaciones que no solo funcionen bien, sino que también ofrezcan una experiencia excepcional al usuario.
-                            </p>
+                    <!-- Objetivos -->
+                    <div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white mb-2 md:mb-3">
+                            <i class="fas fa-bullseye text-green-500 mr-2"></i>Mis objetivos
+                        </h3>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Quiero convertirme en un desarrollador full-stack capaz de crear aplicaciones web completas y escalables. 
+                            Mi meta es dominar tanto el frontend como el backend, entender arquitecturas modernas y poder liderar proyectos 
+                            desde la concepción hasta el despliegue.
+                        </p>
+                    </div>
+                    
+                    <!-- Cómo Contribuir -->
+                    <div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white mb-2 md:mb-3">
+                            <i class="fas fa-hands-helping text-purple-500 mr-2"></i>¿Cómo puedes contribuir?
+                        </h3>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Puedes contribuir reportando errores, sugiriendo mejoras, o contribuyendo código directamente. 
+                            Si tienes experiencia en desarrollo web y te gustaría añadir nuevas características, ¡tus contribuciones son bienvenidas!
+                        </p>
+                    </div>
+                    
+                    <!-- Botón GitHub -->
+                    <div class="text-center py-2 md:py-4">
+                        <a href="https://github.com/Cesarvilla44/Spainly" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center px-4 md:px-6 py-2.5 md:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors text-sm md:text-base">
+                            <i class="fab fa-github mr-2"></i>
+                            Ver en GitHub
+                        </a>
+                    </div>
+                    
+                    <!-- Autoría -->
+                    <div class="pt-4 md:pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start mb-4">
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-spain-red rounded-full flex items-center justify-center mb-3 sm:mb-0 sm:mr-4">
+                                <i class="fas fa-laptop-code text-white text-xl md:text-2xl"></i>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">César Villacañas Moreno</h2>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
+                            </div>
                         </div>
                         
-                        <!-- Objetivos -->
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                                <i class="fas fa-bullseye text-green-500 mr-2"></i>Mis objetivos
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                                Quiero convertirme en un desarrollador full-stack capaz de crear aplicaciones web completas y escalables. 
-                                Mi meta es dominar tanto el frontend como el backend, entender arquitecturas modernas y poder liderar proyectos 
-                                desde la concepción hasta el despliegue. Busco constantemente aprender nuevas tecnologías y mejores prácticas 
-                                para mejorar mis habilidades y ofrecer soluciones innovadoras.
-                            </p>
-                        </div>
-                        
-                        <!-- Cómo Contribuir -->
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                                <i class="fas fa-hands-helping text-purple-500 mr-2"></i>¿Cómo puedes contribuir?
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                                Puedes contribuir a este proyecto de varias maneras: reportando errores que encuentres, sugiriendo mejoras 
-                                para la interfaz o funcionalidad, o incluso contribuyendo código directamente. Si tienes experiencia en 
-                                desarrollo web y te gustaría añadir nuevas características como más lugares turísticos, filtros avanzados 
-                                o integración con APIs externas, ¡tus contribuciones son bienvenidas! También puedes ayudar probando la aplicación 
-                                y dándome feedback sobre la experiencia de usuario.
-                            </p>
-                        </div>
-                        
-                        <!-- Revisión de Errores -->
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                                <i class="fas fa-bug text-red-500 mr-2"></i>Revisión de errores
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                                Me comprometo a revisar y corregir errores de manera diligente. Si encuentras algún problema, 
-                                por favor repórtalo a través de GitHub Issues con la mayor cantidad de detalles posible: 
-                                qué hiciste, qué esperabas que sucediera, y qué ocurrió en realidad. Reviso regularmente 
-                                los reportes y trato de solucionar los problemas lo más rápido posible. También realizo 
-                                pruebas exhaustivas antes de cada actualización para minimizar la aparición de nuevos errores.
-                            </p>
-                        </div>
-                        
-                        <!-- Botón GitHub -->
-                        <div class="text-center py-4">
-                            <a href="https://github.com/Cesarvilla44/Spainly" target="_blank" 
-                               class="inline-flex items-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">
-                                <i class="fab fa-github mr-2"></i>
-                                Ver en GitHub
-                            </a>
-                        </div>
-                        
-                        <!-- Autoría -->
-                        <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center mb-4">
-                                <div class="w-16 h-16 bg-spain-red rounded-full flex items-center justify-center">
-                                    <i class="fas fa-laptop-code text-white text-2xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h2 class="text-xl font-bold text-gray-800 dark:text-white">César Villacañas Moreno</h2>
-                                    <p class="text-gray-600 dark:text-gray-300">cesar.villacanas@alu.ceacfp.es</p>
-                                    <p class="text-gray-600 dark:text-gray-300">Curso: 2026-2027</p>
+                        <div class="space-y-3 md:space-y-4">
+                            <div>
+                                <h3 class="font-bold text-gray-800 dark:text-white mb-1.5 md:mb-2 text-sm md:text-base">Sobre este proyecto</h3>
+                                <p class="text-sm md:text-base text-gray-600 dark:text-gray-300">
+                                    Spainly es una aplicación web desarrollada como parte de mi formación. 
+                                    Permite descubrir lugares de España, con valoraciones y favoritos.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-bold text-gray-800 dark:text-white mb-1.5 md:mb-2 text-sm md:text-base">Tecnologías</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs md:text-sm">HTML5</span>
+                                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs md:text-sm">CSS3</span>
+                                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-xs md:text-sm">JavaScript</span>
+                                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-xs md:text-sm">TypeScript</span>
+                                    <span class="px-2 md:px-3 py-0.5 md:py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-xs md:text-sm">Tailwind CSS</span>
                                 </div>
                             </div>
                             
-                            <div class="space-y-4">
-                                <div>
-                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Sobre este proyecto</h3>
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        Spainly es una aplicación web desarrollada como parte de mi formación en desarrollo de aplicaciones web. 
-                                        Esta plataforma permite descubrir los lugares más impresionantes de España, con información detallada, 
-                                        valoraciones y la posibilidad de guardar tus lugares favoritos.
-                                    </p>
-                                </div>
-                                
-                                <div>
-                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Tecnologías utilizadas</h3>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">HTML5</span>
-                                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">CSS3</span>
-                                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">JavaScript</span>
-                                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm">TypeScript</span>
-                                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-sm">Tailwind CSS</span>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <h3 class="font-bold text-gray-800 dark:text-white mb-2">Características</h3>
-                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                                        <li>40 lugares turísticos famosos de España</li>
-                                        <li>Sistema de búsqueda avanzada con filtros</li>
-                                        <li>Gestión de favoritos</li>
-                                        <li>Valoraciones de lugares</li>
-                                        <li>Interfaz responsive y modo oscuro</li>
-                                        <li>Desarrollado con TypeScript y mejores prácticas</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                        © 2026 César Villacañas Moreno. Proyecto educativo Spainly.
-                                    </p>
-                                </div>
+                            <div class="pt-3 md:pt-4 border-t border-gray-200 dark:border-gray-700">
+                                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 text-center">
+                                    © 2026 César Villacañas Moreno. Proyecto educativo Spainly.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </body>
-            </html>
+            </section>
         `;
         
-        const newWindow = window.open();
-        if (newWindow) {
-            newWindow.document.write(aboutHTML);
-        }
+        this.currentView = 'about';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     public toggleFavorite(placeId: number): void {
@@ -1592,8 +1550,140 @@ class SpainlyApp {
     }
 
     private goToAbout(): void {
-        console.log('Navegando a sobre mí...');
-        this.state.showMessage('conseguido', 'Sobre mí: Función en desarrollo');
+        console.log('Navegando a sobre mí (desktop)...');
+        this.openAboutInNewWindow();
+    }
+
+    private goToAboutMobile(): void {
+        console.log('Navegando a sobre mí (mobile)...');
+        this.showAboutPage();
+    }
+
+    private openAboutInNewWindow(): void {
+        const aboutHTML = `
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Sobre mí - Spainly</title>
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                <style>
+                    .spain-red { color: #c41212; }
+                    .bg-spain-red { background-color: #c41212; }
+                    .from-spain-red { --tw-gradient-from: #c41212; --tw-gradient-to: rgb(196 18 18 / 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+                    .to-spain-yellow { --tw-gradient-to: #ffd700; }
+                    .bg-spain-yellow { background-color: #ffd700; }
+                </style>
+            </head>
+            <body class="bg-gray-50 dark:bg-gray-900">
+                <div class="container mx-auto px-4 py-8 max-w-6xl">
+                    <button onclick="window.close()" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Volver
+                    </button>
+
+                    <div class="rounded-2xl shadow-xl p-8 md:p-10 mb-8 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                            <div>
+                                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white mb-3">
+                                    <i class="fas fa-info-circle spain-red mr-3"></i>Sobre mí
+                                </h2>
+                                <p class="text-lg text-gray-600 dark:text-gray-300">
+                                    Una visión completa del proyecto y de su propósito
+                                </p>
+                            </div>
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-spain-red to-spain-yellow flex items-center justify-center shadow-lg">
+                                <i class="fas fa-laptop-code text-white text-4xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8 mb-8">
+                        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Qué pretende Spainly</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                                Spainly pretende ayudar al usuario a descubrir los maravillosos lugares y joyas de España en un solo espacio digital.
+                                No solo muestra destinos turísticos conocidos, también busca dar visibilidad a rincones con valor cultural, histórico
+                                y natural para que cada viaje sea más completo, informado y especial.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                                La plataforma está pensada para facilitar la exploración por categorías, preferencias y contexto del viaje.
+                                El objetivo es que cualquier persona pueda inspirarse, planificar y disfrutar con confianza de experiencias auténticas
+                                en todo el territorio, desde grandes ciudades hasta pequeños enclaves con encanto.
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                En resumen, Spainly funciona como una guía moderna para conectar al usuario con la riqueza de España:
+                                patrimonio, paisajes, gastronomía y cultura, de forma clara, visual y accesible.
+                            </p>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Datos personales</h3>
+                            <div class="flex flex-col items-start gap-5">
+                                <a href="https://github.com/Cesarvilla44" target="_blank" rel="noopener noreferrer"
+                                   class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://github.com/Cesarvilla44/Spainly" target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center px-5 py-2 bg-spain-yellow text-gray-900 font-semibold rounded-lg hover:bg-yellow-400 transition-colors">
+                                    <i class="fas fa-folder-open mr-2"></i>Ver proyecto
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Tecnologías utilizadas</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4">
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-html5 text-orange-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">HTML 5</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-wind text-cyan-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">CSS Tailwind</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-code text-blue-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">TypeScript</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-react text-sky-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">React</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-node-js text-green-500 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Node</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fas fa-cloud text-gray-700 dark:text-gray-200 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Vercel</p>
+                            </div>
+                            <div class="rounded-xl bg-gray-100 dark:bg-gray-700 p-4 text-center">
+                                <i class="fab fa-trello text-blue-600 text-3xl mb-2"></i>
+                                <p class="text-gray-800 dark:text-white font-semibold">Trello</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl shadow-xl p-8 bg-gradient-to-r from-spain-red to-spain-yellow text-white">
+                        <h3 class="text-2xl font-bold mb-3">Compromiso del proyecto</h3>
+                        <p class="leading-relaxed">
+                            Este proyecto se centra en ofrecer una experiencia clara, útil y agradable para el usuario, ayudándole a descubrir
+                            las joyas de España de manera intuitiva y visual. Spainly sigue creciendo con la misma prioridad: aportar valor real
+                            a cada persona que quiera explorar el país.
+                        </p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+        
+        const newWindow = window.open();
+        if (newWindow) {
+            newWindow.document.write(aboutHTML);
+        }
     }
 
     private handleSearch(query: string = '', filters: FilterOptions = {}): void {
