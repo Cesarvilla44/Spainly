@@ -187,12 +187,12 @@
                 <div class="text-sm text-gray-600 dark:text-gray-300">Valoraciones</div>
             </div>
             
-            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors opacity-75" id="userCounter" title="Próximamente">
-                <div class="text-3xl text-spain-red mb-2">
+            <div onclick="window.app.showProfilePage()" class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="userCounter">
+                <div class="text-3xl text-spain-red mb-2" id="userIcon">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="text-2xl font-bold text-gray-800 dark:text-white" id="userCount">0</div>
-                <div class="text-sm text-gray-600 dark:text-gray-300">Usuario</div>
+                <div class="text-sm text-gray-600 dark:text-gray-300" id="userLabel">Usuario</div>
             </div>
         </div>
     </section>
@@ -262,9 +262,13 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
                     <input type="email" id="loginEmail" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
                 </div>
-                <div class="mb-6">
+                <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Contraseña</label>
                     <input type="password" id="loginPassword" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-red dark:bg-gray-700 dark:text-white">
+                </div>
+                <div class="mb-6 flex items-center">
+                    <input type="checkbox" id="keepSession" class="w-4 h-4 text-spain-yellow border-gray-300 rounded focus:ring-spain-yellow">
+                    <label for="keepSession" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Mantener sesión iniciada</label>
                 </div>
                 <div class="flex space-x-4">
                     <button type="submit" id="loginSubmitBtn" class="flex-1 px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
@@ -297,6 +301,22 @@
             } else {
                 html.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
+            }
+
+            // Mostrar mensaje de confirmación
+            const message = isDark ? 'Modo claro activado' : 'Modo oscuro activado';
+            showMessage(message);
+        }
+
+        function showMessage(text) {
+            const msgDiv = document.getElementById('conseguidoMessage');
+            const msgText = document.getElementById('conseguidoText');
+            if (msgDiv && msgText) {
+                msgText.textContent = text;
+                msgDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    msgDiv.classList.add('hidden');
+                }, 2000);
             }
         }
 
@@ -482,17 +502,7 @@
             });
             aboutBtn?.addEventListener('click', () => openAboutPage());
 
-            registerForm?.addEventListener('submit', function(e) {
-                e.preventDefault();
-                closeModal('registerModal');
-                showMessage('Registro: función en desarrollo');
-            });
-
-            loginForm?.addEventListener('submit', function(e) {
-                e.preventDefault();
-                closeModal('loginModal');
-                showMessage('Login: función en desarrollo');
-            });
+            // Los formularios de registro y login se manejan en app.ts
 
             // Manejo de tecla Escape para cerrar modales
             document.addEventListener('keydown', function(e) {

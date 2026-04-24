@@ -211,22 +211,72 @@ export class SpainlyState {
         return this.theme;
     }
 
-    public login(username: string, email: string): void {
-        this.currentUser = { username, email };
-        this.counters.user = 1;
+    public register(username: string, email: string, password: string): void {
+        // Crear usuario básico, el perfil completo se completa después
+        this.currentUser = { username, email, password };
         this.saveToStorage('currentUser', this.currentUser);
-        this.saveToStorage('counters', this.counters);
+    }
+
+    public login(email: string, password: string, keepSession: boolean = false): boolean {
+        // En una app real, aquí verificaríamos contra una base de datos
+        // Por ahora, simulamos que el login es exitoso si hay un usuario registrado
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            if (user.email === email && user.password === password) {
+                this.currentUser = { ...user, keepSession };
+                this.counters.user = 1;
+                this.saveToStorage('currentUser', this.currentUser);
+                this.saveToStorage('counters', this.counters);
+                return true;
+            }
+        }
+        return false;
     }
 
     public logout(): void {
         this.currentUser = null;
         this.counters.user = 0;
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('sessionActive');
         this.saveToStorage('counters', this.counters);
     }
 
     public isLoggedIn(): boolean {
-        return this.currentUser !== null;
+        // Si hay usuario cargado en memoria, está logueado
+        if (this.currentUser !== null) {
+            // Asegurar que el contador refleje que hay usuario
+            if (this.counters.user === 0) {
+                this.counters.user = 1;
+                this.saveToStorage('counters', this.counters);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public hasRegisteredUser(): boolean {
+        // Verificar si existe un usuario registrado en localStorage
+        const storedUser = localStorage.getItem('currentUser');
+        return storedUser !== null;
+    }
+
+    public setSessionActive(active: boolean): void {
+        localStorage.setItem('sessionActive', active ? 'true' : 'false');
+    }
+
+    public updateUserProfile(profileData: Partial<User>): void {
+        if (this.currentUser) {
+            this.currentUser = { ...this.currentUser, ...profileData };
+            this.saveToStorage('currentUser', this.currentUser);
+        }
+    }
+
+    public updateUserPhoto(photoBase64: string): void {
+        if (this.currentUser) {
+            this.currentUser.photo = photoBase64;
+            this.saveToStorage('currentUser', this.currentUser);
+        }
     }
 
     // Métodos de utilidad

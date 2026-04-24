@@ -49,6 +49,13 @@ class SpainlyApp {
         try {
             await this.loadPlaces();
             this.setupEventListeners();
+            
+            // Verificar si hay usuario guardado y actualizar contador
+            if (this.state.isLoggedIn()) {
+                this.updateUserCounter();
+                console.log('Usuario logueado recuperado de localStorage');
+            }
+            
             this.renderCurrentView();
             this.state.showMessage('conseguido', 'Aplicación iniciada correctamente');
             this.connectToServer();
@@ -629,9 +636,29 @@ class SpainlyApp {
         this.setupButton('closeRegisterModal', () => this.closeModal('registerModal'));
         this.setupButton('closeLoginModal', () => this.closeModal('loginModal'));
         
-        // Botones de acción en modales
-        this.setupButton('registerSubmitBtn', () => this.handleRegister());
-        this.setupButton('loginSubmitBtn', () => this.handleLogin());
+        // Formulario de registro
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = (document.getElementById('regUsername') as HTMLInputElement)?.value;
+                const email = (document.getElementById('regEmail') as HTMLInputElement)?.value;
+                const password = (document.getElementById('regPassword') as HTMLInputElement)?.value;
+                this.handleRegister(username, email, password);
+            });
+        }
+        
+        // Formulario de login
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = (document.getElementById('loginEmail') as HTMLInputElement)?.value;
+                const password = (document.getElementById('loginPassword') as HTMLInputElement)?.value;
+                const keepSession = (document.getElementById('keepSession') as HTMLInputElement)?.checked;
+                this.handleLogin(email, password, keepSession);
+            });
+        }
         
         console.log('Listeners de modales configurados');
     }
@@ -667,7 +694,7 @@ class SpainlyApp {
     private setupProfileListeners(): void {
         console.log('Configurando listeners de perfil...');
         
-        this.setupButton('profileBtn', () => this.showProfile());
+        this.setupButton('profileBtn', () => this.showProfilePage());
         
         console.log('Listeners de perfil configurados');
     }
@@ -711,18 +738,8 @@ class SpainlyApp {
     
     private setupThemeToggle(): void {
         const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            // Eliminar event listeners previos para evitar duplicación
-            const newThemeToggle = themeToggle.cloneNode(true);
-            themeToggle.parentNode?.replaceChild(newThemeToggle, themeToggle);
-            
-            // Añadir event listener único
-            newThemeToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                this.toggleTheme();
-            });
-        }
+        // El theme toggle se maneja directamente desde el HTML onclick="toggleTheme()"
+        // No es necesario añadir listeners aquí
     }
 
     private handleGlobalClick(e: Event): void {
@@ -773,9 +790,17 @@ class SpainlyApp {
         const target = e.target as HTMLFormElement;
         
         if (target.id === 'registerForm') {
-            this.handleRegister(e);
+            e.preventDefault();
+            const username = (document.getElementById('regUsername') as HTMLInputElement)?.value;
+            const email = (document.getElementById('regEmail') as HTMLInputElement)?.value;
+            const password = (document.getElementById('regPassword') as HTMLInputElement)?.value;
+            this.handleRegister(username, email, password);
         } else if (target.id === 'loginForm') {
-            this.handleLogin(e);
+            e.preventDefault();
+            const email = (document.getElementById('loginEmail') as HTMLInputElement)?.value;
+            const password = (document.getElementById('loginPassword') as HTMLInputElement)?.value;
+            const keepSession = (document.getElementById('keepSession') as HTMLInputElement)?.checked;
+            this.handleLogin(email, password, keepSession);
         }
     }
 
@@ -972,6 +997,10 @@ class SpainlyApp {
         this.setupModalListeners();
         this.setupSearchListeners();
         this.setupHomeSearchListeners();
+
+        // Guardar contenido del home para poder volver más tarde
+        this.homeMainContent = container.innerHTML;
+        this.currentView = 'home';
     }
 
     private createSimplePlaceCard(place: Place): string {
@@ -1507,22 +1536,6 @@ class SpainlyApp {
         }
     }
 
-    private handleRegister(event?: Event): void {
-        if (event) {
-            event.preventDefault();
-        }
-        console.log('Procesando registro...');
-        this.state.showMessage('conseguido', 'Función de registro en desarrollo');
-    }
-
-    private handleLogin(event?: Event): void {
-        if (event) {
-            event.preventDefault();
-        }
-        console.log('Procesando login...');
-        this.state.showMessage('conseguido', 'Función de login en desarrollo');
-    }
-
     public goToReports(): void {
         this.showReportsPage();
     }
@@ -1867,8 +1880,16 @@ class SpainlyApp {
 
     public restoreHomeContent(): void {
         const mainContent = document.getElementById('mainContent');
-        if (!mainContent || !this.homeMainContent) return;
+        if (!mainContent) return;
+
+        // Si no hay contenido guardado, renderizar el home de nuevo
+        if (!this.homeMainContent) {
+            this.renderHome();
+            return;
+        }
+
         mainContent.innerHTML = this.homeMainContent;
+        this.currentView = 'home';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -2026,9 +2047,442 @@ class SpainlyApp {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    private showProfile(): void {
-        console.log('Mostrando perfil...');
-        this.state.showMessage('conseguido', 'Perfil: Función en desarrollo');
+    public showCompleteProfilePage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        this.currentView = 'complete-profile';
+
+        mainContent.innerHTML = `
+            <section class="max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+                    <i class="fas fa-user-edit text-spain-yellow mr-3"></i>Completa tu perfil
+                </h2>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                    <form id="completeProfileForm">
+                        <!-- Foto de perfil -->
+                        <div class="mb-6 text-center">
+                            <div class="relative inline-block">
+                                <div id="profilePhotoPreview" class="w-32 h-32 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                                    <i class="fas fa-user text-4xl text-gray-400"></i>
+                                </div>
+                                <label for="profilePhoto" class="absolute bottom-0 right-0 bg-spain-red text-white p-2 rounded-full cursor-pointer hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="profilePhoto" accept="image/*" class="hidden" onchange="window.app.handlePhotoPreview(this)">
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Haz clic en la cámara para subir una foto</p>
+                        </div>
+
+                        <!-- Nombre de perfil -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-id-card mr-2"></i>Nombre de perfil *
+                            </label>
+                            <input type="text" id="profileName" required 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white"
+                                   placeholder="Cómo quieres que te llamemos">
+                        </div>
+
+                        <!-- Fecha de nacimiento -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-birthday-cake mr-2"></i>Fecha de nacimiento *
+                            </label>
+                            <input type="date" id="birthDate" required 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white">
+                        </div>
+
+                        <!-- Descripción breve -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-pen mr-2"></i>Descripción breve (opcional)
+                            </label>
+                            <textarea id="bio" rows="3" 
+                                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white"
+                                      placeholder="Cuéntanos algo sobre ti..."></textarea>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="flex space-x-4">
+                            <button type="submit" class="flex-1 px-6 py-3 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors font-semibold">
+                                <i class="fas fa-check mr-2"></i>Aceptar
+                            </button>
+                            <button type="button" onclick="window.app.restoreHomeContent()" 
+                                    class="flex-1 px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                                <i class="fas fa-times mr-2"></i>Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        `;
+
+        // Configurar el listener del formulario
+        const form = document.getElementById('completeProfileForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleCompleteProfile();
+            });
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    public handlePhotoPreview(input: HTMLInputElement): void {
+        const preview = document.getElementById('profilePhotoPreview');
+        if (!preview || !input.files || input.files.length === 0) return;
+
+        const file = input.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const result = e.target?.result as string;
+            if (result) {
+                preview.innerHTML = `<img src="${result}" class="w-full h-full object-cover" alt="Foto de perfil">`;
+                // Guardar temporalmente la foto
+                (preview as any).dataset.photo = result;
+            }
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    private handleCompleteProfile(): void {
+        const profileName = (document.getElementById('profileName') as HTMLInputElement)?.value;
+        const birthDate = (document.getElementById('birthDate') as HTMLInputElement)?.value;
+        const bio = (document.getElementById('bio') as HTMLTextAreaElement)?.value;
+        const preview = document.getElementById('profilePhotoPreview');
+        const photo = (preview as any)?.dataset?.photo;
+
+        if (!profileName || !birthDate) {
+            this.state.showMessage('error', 'Por favor completa los campos obligatorios');
+            return;
+        }
+
+        // Actualizar perfil del usuario
+        const profileData: Partial<{ profileName: string; birthDate: string; bio: string; photo: string }> = {
+            profileName,
+            birthDate
+        };
+        
+        if (bio) profileData.bio = bio;
+        if (photo) profileData.photo = photo;
+        
+        this.state.updateUserProfile(profileData);
+
+        this.state.showMessage('conseguido', '¡Perfil completado! Bienvenido a Spainly');
+        this.updateUserCounter();
+        this.restoreHomeContent();
+    }
+
+    public showProfilePage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        const user = this.state.getCurrentUser();
+        if (!user) {
+            // Si no está logueado, mostrar mensaje y opción de login
+            mainContent.innerHTML = `
+                <section class="max-w-2xl mx-auto text-center">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12">
+                        <i class="fas fa-user-lock text-6xl text-gray-300 mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Inicia sesión para ver tu perfil</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">Necesitas estar registrado para acceder a esta función</p>
+                        <div class="flex space-x-4 justify-center">
+                            <button onclick="openModal('loginModal')" class="px-6 py-3 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Iniciar sesión
+                            </button>
+                            <button onclick="window.app.restoreHomeContent()" class="px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                                <i class="fas fa-arrow-left mr-2"></i>Volver
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        this.currentView = 'profile-page';
+
+        const isEditing = false; // Por defecto modo vista
+
+        mainContent.innerHTML = `
+            <section class="max-w-4xl mx-auto">
+                <button onclick="window.app.restoreHomeContent()" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <!-- Header del perfil -->
+                    <div class="bg-gradient-to-r from-spain-red to-spain-yellow p-8 text-white">
+                        <div class="flex items-center space-x-6">
+                            <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                                ${user.photo 
+                                    ? `<img src="${user.photo}" class="w-full h-full object-cover" alt="Foto de perfil">`
+                                    : `<i class="fas fa-user text-4xl text-gray-400"></i>`
+                                }
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold">${user.profileName || user.username}</h2>
+                                <p class="text-white/90">${user.email}</p>
+                                ${user.birthDate ? `<p class="text-white/80 text-sm mt-1"><i class="fas fa-birthday-cake mr-1"></i>${new Date(user.birthDate).toLocaleDateString('es-ES')}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido del perfil -->
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">
+                                <i class="fas fa-info-circle mr-2 text-spain-red"></i>Información del perfil
+                            </h3>
+                            <button onclick="window.app.showEditProfilePage()" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                                <i class="fas fa-edit mr-1"></i>Editar perfil
+                            </button>
+                        </div>
+
+                        ${user.bio ? `
+                            <div class="mb-6">
+                                <h4 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase mb-2">Sobre mí</h4>
+                                <p class="text-gray-700 dark:text-gray-300">${user.bio}</p>
+                            </div>
+                        ` : ''}
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Nombre de usuario</p>
+                                <p class="font-semibold text-gray-800 dark:text-white">${user.username}</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                                <p class="font-semibold text-gray-800 dark:text-white">${user.email}</p>
+                            </div>
+                            ${user.birthDate ? `
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Fecha de nacimiento</p>
+                                    <p class="font-semibold text-gray-800 dark:text-white">${new Date(user.birthDate).toLocaleDateString('es-ES')}</p>
+                                </div>
+                            ` : ''}
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Miembro desde</p>
+                                <p class="font-semibold text-gray-800 dark:text-white">${new Date().toLocaleDateString('es-ES')}</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t dark:border-gray-700 pt-6 flex justify-between items-center">
+                            <button onclick="window.app.logout()" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión
+                            </button>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Sesión ${user.keepSession ? 'activa (recordada)' : 'activa'}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    public showEditProfilePage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        const user = this.state.getCurrentUser();
+        if (!user) return;
+
+        this.currentView = 'edit-profile';
+
+        mainContent.innerHTML = `
+            <section class="max-w-2xl mx-auto">
+                <button onclick="window.app.showProfilePage()" class="mb-8 px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al perfil
+                </button>
+
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+                    <i class="fas fa-user-edit text-spain-yellow mr-3"></i>Editar perfil
+                </h2>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                    <form id="editProfileForm">
+                        <!-- Foto de perfil -->
+                        <div class="mb-6 text-center">
+                            <div class="relative inline-block">
+                                <div id="profilePhotoPreview" class="w-32 h-32 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                                    ${user.photo 
+                                        ? `<img src="${user.photo}" class="w-full h-full object-cover" alt="Foto de perfil">`
+                                        : `<i class="fas fa-user text-4xl text-gray-400"></i>`
+                                    }
+                                </div>
+                                <label for="profilePhoto" class="absolute bottom-0 right-0 bg-spain-red text-white p-2 rounded-full cursor-pointer hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="profilePhoto" accept="image/*" class="hidden" onchange="window.app.handlePhotoPreview(this)">
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Haz clic en la cámara para cambiar la foto</p>
+                        </div>
+
+                        <!-- Nombre de perfil -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-id-card mr-2"></i>Nombre de perfil
+                            </label>
+                            <input type="text" id="profileName" value="${user.profileName || ''}" required 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white">
+                        </div>
+
+                        <!-- Fecha de nacimiento -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-birthday-cake mr-2"></i>Fecha de nacimiento
+                            </label>
+                            <input type="date" id="birthDate" value="${user.birthDate || ''}" required 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white">
+                        </div>
+
+                        <!-- Descripción breve -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <i class="fas fa-pen mr-2"></i>Descripción breve
+                            </label>
+                            <textarea id="bio" rows="3" 
+                                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-spain-yellow dark:bg-gray-700 dark:text-white">${user.bio || ''}</textarea>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="flex space-x-4">
+                            <button type="submit" class="flex-1 px-6 py-3 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors font-semibold">
+                                <i class="fas fa-save mr-2"></i>Guardar cambios
+                            </button>
+                            <button type="button" onclick="window.app.showProfilePage()" 
+                                    class="flex-1 px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors">
+                                <i class="fas fa-times mr-2"></i>Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        `;
+
+        // Configurar el listener del formulario
+        const form = document.getElementById('editProfileForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleEditProfile();
+            });
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    private handleEditProfile(): void {
+        const profileName = (document.getElementById('profileName') as HTMLInputElement)?.value;
+        const birthDate = (document.getElementById('birthDate') as HTMLInputElement)?.value;
+        const bio = (document.getElementById('bio') as HTMLTextAreaElement)?.value;
+        const preview = document.getElementById('profilePhotoPreview');
+        const photo = (preview as any)?.dataset?.photo;
+
+        if (!profileName || !birthDate) {
+            this.state.showMessage('error', 'Por favor completa los campos obligatorios');
+            return;
+        }
+
+        // Actualizar perfil del usuario
+        this.state.updateUserProfile({
+            profileName,
+            birthDate,
+            bio: bio || undefined,
+            ...(photo && { photo })
+        });
+
+        this.state.showMessage('conseguido', '¡Perfil actualizado correctamente!');
+        this.showProfilePage();
+    }
+
+    public handleRegister(username: string, email: string, password: string): void {
+        if (!username || !email || !password) {
+            this.state.showMessage('error', 'Por favor completa todos los campos');
+            return;
+        }
+
+        // Registrar usuario
+        this.state.register(username, email, password);
+        
+        // Cerrar modal
+        const modal = document.getElementById('registerModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        this.state.showMessage('conseguido', '¡Registro exitoso! Ahora completa tu perfil');
+        
+        // Redirigir a página de completar perfil
+        this.showCompleteProfilePage();
+    }
+
+    public handleLogin(email: string, password: string, keepSession: boolean): void {
+        if (!email || !password) {
+            this.state.showMessage('error', 'Por favor introduce email y contraseña');
+            return;
+        }
+
+        const success = this.state.login(email, password, keepSession);
+        
+        if (success) {
+            // Cerrar modal
+            const modal = document.getElementById('loginModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+
+            // Activar sesión si se solicitó mantener iniciada
+            if (keepSession) {
+                this.state.setSessionActive(true);
+            }
+
+            this.updateUserCounter();
+            this.state.showMessage('conseguido', keepSession ? '¡Bienvenido de nuevo! (Sesión recordada)' : '¡Bienvenido de nuevo!');
+        } else {
+            this.state.showMessage('error', 'Email o contraseña incorrectos');
+        }
+    }
+
+    public logout(): void {
+        this.state.logout();
+        this.updateUserCounter();
+        this.state.showMessage('conseguido', 'Sesión cerrada');
+        this.restoreHomeContent();
+    }
+
+    private updateUserCounter(): void {
+        const userCountElement = document.getElementById('userCount');
+        const userLabelElement = document.getElementById('userLabel');
+        const userIconElement = document.getElementById('userIcon');
+        
+        if (userCountElement) {
+            userCountElement.textContent = this.state.isLoggedIn() ? '1' : '0';
+        }
+        
+        if (userLabelElement) {
+            userLabelElement.textContent = this.state.isLoggedIn() ? 'Conectado' : 'Usuario';
+        }
+
+        // Actualizar icono si hay foto de perfil
+        const user = this.state.getCurrentUser();
+        if (userIconElement && user?.photo) {
+            userIconElement.innerHTML = `<img src="${user.photo}" class="w-10 h-10 rounded-full object-cover border-2 border-white" alt="Perfil">`;
+        } else if (userIconElement) {
+            userIconElement.innerHTML = `<i class="fas fa-user"></i>`;
+        }
     }
 }
 

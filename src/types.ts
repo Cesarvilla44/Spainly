@@ -16,6 +16,12 @@ export interface Place {
 export interface User {
     username: string;
     email: string;
+    password?: string;
+    profileName?: string;
+    birthDate?: string;
+    bio?: string;
+    photo?: string; // Base64 de la imagen
+    keepSession?: boolean;
     favorites?: number[];
     ratings?: number[];
 }
