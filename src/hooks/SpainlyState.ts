@@ -6,6 +6,7 @@ export class SpainlyState {
     private places: Place[] = [];
     private favorites: number[] = [];
     private ratings: { placeId: number; rating: number }[] = [];
+    private searchHistory: string[] = [];
     private currentUser: User | null = null;
     private theme: Theme = 'light';
     private counters: Counter = {
@@ -31,12 +32,14 @@ export class SpainlyState {
         try {
             const favorites = localStorage.getItem('favorites');
             const ratings = localStorage.getItem('ratings');
+            const searchHistory = localStorage.getItem('searchHistory');
             const user = localStorage.getItem('currentUser');
             const theme = localStorage.getItem('theme');
             const counters = localStorage.getItem('counters');
 
             if (favorites) this.favorites = JSON.parse(favorites);
             if (ratings) this.ratings = JSON.parse(ratings);
+            if (searchHistory) this.searchHistory = JSON.parse(searchHistory);
             if (user) this.currentUser = JSON.parse(user);
             if (theme) this.theme = theme as Theme;
             if (counters) this.counters = JSON.parse(counters);
@@ -111,6 +114,19 @@ export class SpainlyState {
         return this.favorites.includes(placeId);
     }
 
+    public getSearchHistory(): string[] {
+        return [...this.searchHistory];
+    }
+
+    public addSearch(query: string): void {
+        if (!query.trim()) return;
+        // Añadir al principio y eliminar duplicados
+        this.searchHistory = [query, ...this.searchHistory.filter(s => s !== query)].slice(0, 20);
+        this.counters.searches++;
+        this.saveToStorage('searchHistory', this.searchHistory);
+        this.saveToStorage('counters', this.counters);
+    }
+
     public addRating(placeId: number, rating: number): void {
         // Verificar si ya existe una valoración para este lugar
         const existingIndex = this.ratings.findIndex(r => r.placeId === placeId);
@@ -139,6 +155,19 @@ export class SpainlyState {
 
     public getTotalRatings(): number {
         return this.ratings.length;
+    }
+
+    public removeRating(placeId: number): void {
+        const initialLength = this.ratings.length;
+        this.ratings = this.ratings.filter(r => r.placeId !== placeId);
+        
+        // Solo decrementar si realmente se eliminó algo
+        if (this.ratings.length < initialLength) {
+            this.counters.ratings = Math.max(0, this.counters.ratings - 1);
+        }
+        
+        this.saveToStorage('ratings', this.ratings);
+        this.saveToStorage('counters', this.counters);
     }
 
     public searchPlaces(query: string, filters: FilterOptions): Place[] {

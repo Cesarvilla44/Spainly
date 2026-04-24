@@ -163,7 +163,7 @@
     <!-- Sistema de contadores -->
     <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 mt-12 container mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="searchCounter">
+            <div onclick="window.app.showSearchHistoryPage()" class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="searchCounter">
                 <div class="text-3xl text-spain-red mb-2">
                     <i class="fas fa-search"></i>
                 </div>
@@ -171,7 +171,7 @@
                 <div class="text-sm text-gray-600 dark:text-gray-300">Búsquedas</div>
             </div>
             
-            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="favoriteCounter">
+            <div onclick="window.app.showFavoritesPage()" class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="favoriteCounter">
                 <div class="text-3xl text-spain-red mb-2">
                     <i class="fas fa-heart"></i>
                 </div>
@@ -179,7 +179,7 @@
                 <div class="text-sm text-gray-600 dark:text-gray-300">Favoritos</div>
             </div>
             
-            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="ratingCounter">
+            <div onclick="window.app.showRatingsPage()" class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="ratingCounter">
                 <div class="text-3xl text-spain-yellow mb-2">
                     <i class="fas fa-star"></i>
                 </div>
@@ -187,7 +187,7 @@
                 <div class="text-sm text-gray-600 dark:text-gray-300">Valoraciones</div>
             </div>
             
-            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors" id="userCounter">
+            <div class="text-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-4 rounded-lg transition-colors opacity-75" id="userCounter" title="Próximamente">
                 <div class="text-3xl text-spain-red mb-2">
                     <i class="fas fa-user"></i>
                 </div>

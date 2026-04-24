@@ -641,8 +641,8 @@ class SpainlyApp {
         
         // Botones de la barra de navegación
         this.setupButton('searchBtn', () => this.handleSearch());
-        this.setupButton('favoritesBtn', () => this.showFavorites());
-        this.setupButton('ratingsBtn', () => this.showRatings());
+        this.setupButton('favoritesBtn', () => this.showFavoritesPage());
+        this.setupButton('ratingsBtn', () => this.showRatingsPage());
         
         // Inputs de búsqueda y filtros
         const searchInput = document.getElementById('searchInput') as HTMLInputElement;
@@ -1463,6 +1463,24 @@ class SpainlyApp {
             this.state.addRating(placeId, rating);
             this.updateRatingCounter();
             this.state.showMessage('conseguido', '¡Valoración guardada! Has dado ' + rating + ' estrellas');
+            
+            // Si estamos en la página de valoraciones, refrescarla
+            if (this.currentView === 'ratings-page') {
+                this.showRatingsPage();
+            }
+        } else if (rating === 0) {
+            // Eliminar valoración
+            this.state.removeRating(placeId);
+            this.updateRatingCounter();
+            this.state.showMessage('conseguido', 'Valoración eliminada');
+            
+            // Si estamos en la página de valoraciones, refrescarla
+            if (this.currentView === 'ratings-page') {
+                this.showRatingsPage();
+            } else if (this.currentView === 'place-details') {
+                // Si estamos en detalles del lugar, refrescar para mostrar estrellas vacías
+                this.showPlaceDetails(placeId);
+            }
         }
     }
 
@@ -1854,14 +1872,158 @@ class SpainlyApp {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    private showFavorites(): void {
-        console.log('Mostrando favoritos...');
-        this.state.showMessage('conseguido', 'Favoritos: Función en desarrollo');
+    public showSearchHistoryPage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        this.currentView = 'search-history';
+
+        const searchHistory = this.state.getSearchHistory ? this.state.getSearchHistory() : [];
+
+        mainContent.innerHTML = `
+            <section class="max-w-6xl mx-auto">
+                <button onclick="window.app.restoreHomeContent()" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+                    <i class="fas fa-search text-spain-red mr-3"></i>Historial de Búsquedas
+                </h2>
+
+                ${searchHistory.length === 0 ? `
+                    <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-600 dark:text-gray-400 text-lg">No hay búsquedas recientes</p>
+                        <p class="text-gray-500 dark:text-gray-500 mt-2">Las búsquedas que realices aparecerán aquí</p>
+                    </div>
+                ` : `
+                    <div class="space-y-4">
+                        ${searchHistory.map((search: string, index: number) => `
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-spain-red font-bold mr-4">#${index + 1}</span>
+                                    <span class="text-gray-800 dark:text-white">${search}</span>
+                                </div>
+                                <button onclick="window.app.performSearch('${search}')" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-400 transition-colors">
+                                    <i class="fas fa-redo mr-1"></i>Buscar de nuevo
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `}
+            </section>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    private showRatings(): void {
-        console.log('Mostrando valoraciones...');
-        this.state.showMessage('conseguido', 'Valoraciones: Función en desarrollo');
+    public showFavoritesPage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        this.currentView = 'favorites-page';
+
+        const favoriteIds = this.state.getFavorites ? this.state.getFavorites() : [];
+        const allPlaces = this.state.getPlaces();
+        const favoritePlaces = allPlaces.filter(p => favoriteIds.includes(p.id));
+
+        mainContent.innerHTML = `
+            <section class="max-w-6xl mx-auto">
+                <button onclick="window.app.restoreHomeContent()" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+                    <i class="fas fa-heart text-spain-red mr-3"></i>Mis Favoritos
+                    <span class="text-lg font-normal text-gray-500 dark:text-gray-400">(${favoritePlaces.length})</span>
+                </h2>
+
+                ${favoritePlaces.length === 0 ? `
+                    <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fas fa-heart text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-600 dark:text-gray-400 text-lg">No tienes favoritos guardados</p>
+                        <p class="text-gray-500 dark:text-gray-500 mt-2">Haz clic en el corazón de cualquier lugar para añadirlo</p>
+                        <button onclick="window.app.restoreHomeContent()" class="mt-6 px-6 py-3 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-400 transition-colors">
+                            <i class="fas fa-map mr-2"></i>Explorar lugares
+                        </button>
+                    </div>
+                ` : `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        ${favoritePlaces.map(place => this.createSimplePlaceCard(place)).join('')}
+                    </div>
+                `}
+            </section>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    public showRatingsPage(): void {
+        const mainContent = document.getElementById('mainContent');
+        if (!mainContent) return;
+
+        this.currentView = 'ratings-page';
+
+        const allPlaces = this.state.getPlaces();
+        const ratedPlaces = allPlaces
+            .map(place => ({ place, rating: this.state.getRating(place.id) }))
+            .filter(item => item.rating !== null)
+            .sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+        mainContent.innerHTML = `
+            <section class="max-w-6xl mx-auto">
+                <button onclick="window.app.restoreHomeContent()" class="mb-8 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver al inicio
+                </button>
+
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+                    <i class="fas fa-star text-spain-yellow mr-3"></i>Mis Valoraciones
+                    <span class="text-lg font-normal text-gray-500 dark:text-gray-400">(${ratedPlaces.length})</span>
+                </h2>
+
+                ${ratedPlaces.length === 0 ? `
+                    <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fas fa-star text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-600 dark:text-gray-400 text-lg">No has valorado ningún lugar</p>
+                        <p class="text-gray-500 dark:text-gray-500 mt-2">Visita cualquier lugar y dale estrellas para guardar tu valoración</p>
+                        <button onclick="window.app.restoreHomeContent()" class="mt-6 px-6 py-3 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-400 transition-colors">
+                            <i class="fas fa-map mr-2"></i>Explorar lugares
+                        </button>
+                    </div>
+                ` : `
+                    <div class="space-y-4">
+                        ${ratedPlaces.map(({ place, rating }) => `
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                                <div class="flex flex-col md:flex-row">
+                                    <div class="md:w-48 h-48 md:h-auto flex-shrink-0">
+                                        <img src="${place.image}" alt="${place.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="p-6 flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">${place.name}</h3>
+                                            <div class="flex items-center">
+                                                ${Array(5).fill(0).map((_, i) => `
+                                                    <i class="fas fa-star ${i < (rating || 0) ? 'text-spain-yellow' : 'text-gray-300 dark:text-gray-600'} text-xl"></i>
+                                                `).join('')}
+                                                <span class="ml-2 text-lg font-bold text-spain-yellow">${rating}/5</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-400 mb-4">${place.description}</p>
+                                        <div class="flex space-x-3">
+                                            <button onclick="window.app.showPlaceDetails(${place.id})" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-400 transition-colors">
+                                                <i class="fas fa-info-circle mr-1"></i>Ver detalles
+                                            </button>
+                                            <button onclick="window.app.submitRating(${place.id}, 0)" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                                                <i class="fas fa-trash mr-1"></i>Eliminar valoración
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `}
+            </section>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     private showProfile(): void {
