@@ -86,7 +86,7 @@ class SpainlyApp {
                 id: 1,
                 name: "Sagrada Familia",
                 province: "barcelona",
-                category: "montaña",
+                category: "monumento",
                 schedule: "09-20",
                 image: "images/lugares/Sagrada Familia.png",
                 description: "Templo católico en construcción, obra maestra de Gaudí",
@@ -110,7 +110,7 @@ class SpainlyApp {
                 id: 3,
                 name: "Alhambra",
                 province: "granada",
-                category: "montaña",
+                category: "monumento",
                 schedule: "08-19",
                 image: "images/lugares/Alhambra.jpg",
                 description: "Palacio nazarí y conjunto monumental de Granada",
@@ -122,7 +122,7 @@ class SpainlyApp {
                 id: 4,
                 name: "Park Güell",
                 province: "barcelona",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-18",
                 image: "images/lugares/park-guell.jpg",
                 description: "Parque público diseñado por Antoni Gaudí",
@@ -146,7 +146,7 @@ class SpainlyApp {
                 id: 6,
                 name: "Mezquita de Córdoba",
                 province: "cordoba",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-19",
                 image: "images/lugares/mezquita de cordoba.jpg",
                 description: "Catedral de estilo califal con bosque de columnas",
@@ -242,7 +242,7 @@ class SpainlyApp {
                 id: 14,
                 name: "Ciudad de las Artes y las Ciencias",
                 province: "valencia",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-19",
                 image: "images/lugares/ciudad de la ciencia y las artes.jpg",
                 description: "Complejo arquitectónico y cultural de Santiago Calatrava",
@@ -266,7 +266,7 @@ class SpainlyApp {
                 id: 16,
                 name: "Guggenheim Bilbao",
                 province: "bilbao",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-20",
                 image: "images/lugares/museoguggenheimbilbao1.jpg",
                 description: "Museo de arte contemporáneo de Frank Gehry",
@@ -290,7 +290,7 @@ class SpainlyApp {
                 id: 18,
                 name: "Acueducto de Segovia",
                 province: "segovia",
-                category: "montaña",
+                category: "monumento",
                 schedule: "24h",
                 image: "images/lugares/Aqueduct_of_Segovia_02.jpg",
                 description: "Obra de ingeniería romana del siglo I",
@@ -314,7 +314,7 @@ class SpainlyApp {
                 id: 20,
                 name: "Catedral de Burgos",
                 province: "burgos",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-19",
                 image: "images/lugares/Burgos_-_Catedral_173.jpg",
                 description: "Catedral gótica del siglo XIII",
@@ -338,7 +338,7 @@ class SpainlyApp {
                 id: 22,
                 name: "Museo del Prado",
                 province: "madrid",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-20",
                 image: "images/lugares/museo del prado.jpg",
                 description: "Uno de los museos más importantes del mundo",
@@ -386,7 +386,7 @@ class SpainlyApp {
                 id: 26,
                 name: "Casa Batlló",
                 province: "barcelona",
-                category: "montaña",
+                category: "monumento",
                 schedule: "09-20",
                 image: "images/lugares/casa batllo.jpg",
                 description: "Obra maestra de Gaudí en Paseo de Gracia",
@@ -458,7 +458,7 @@ class SpainlyApp {
                 id: 32,
                 name: "Toledo",
                 province: "toledo",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-18",
                 image: "images/lugares/Toledo.jpg",
                 description: "Ciudad de las tres culturas",
@@ -482,7 +482,7 @@ class SpainlyApp {
                 id: 34,
                 name: "Salamanca",
                 province: "salamanca",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-20",
                 image: "images/lugares/salamanca.jpg",
                 description: "Ciudad dorada con la universidad más antigua",
@@ -506,7 +506,7 @@ class SpainlyApp {
                 id: 36,
                 name: "Santiago de Compostela",
                 province: "lugo",
-                category: "montaña",
+                category: "monumento",
                 schedule: "10-19",
                 image: "images/lugares/Santiago-de-Compostela-scaled-e1705319664528.jpeg",
                 description: "Destino del Camino de Santiago",
@@ -554,7 +554,7 @@ class SpainlyApp {
                 id: 40,
                 name: "Gran Vía de Madrid",
                 province: "madrid",
-                category: "montaña",
+                category: "monumento",
                 schedule: "24h",
                 image: "images/lugares/gran via.jpg",
                 description: "La Broadway de Madrid",
@@ -989,8 +989,8 @@ class SpainlyApp {
                         <button onclick="window.app.showPlaceDetails(${place.id})" class="flex-1 px-3 py-1 bg-spain-yellow text-gray-800 text-sm rounded hover:bg-yellow-400 transition-colors">
                             <i class="fas fa-info-circle mr-1"></i>Detalles
                         </button>
-                        <button class="px-3 py-1 bg-spain-red text-white text-sm rounded hover:bg-red-600 transition-colors">
-                            <i class="fas fa-heart"></i>
+                        <button onclick="window.app.toggleFavoriteAndUpdate(${place.id}, this)" class="px-3 py-1 bg-spain-red text-white text-sm rounded hover:bg-red-600 transition-colors ${this.state.isFavorite(place.id) ? 'favorite-active' : ''}">
+                            <i class="fas fa-heart ${this.state.isFavorite(place.id) ? 'text-yellow-300' : ''}"></i>
                         </button>
                     </div>
                 </div>
@@ -1135,11 +1135,11 @@ class SpainlyApp {
                 icon: 'fa-water',
                 summary: 'Archipiélago protegido con playas de arena blanca y aguas claras.',
                 mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Islas+C%C3%ADes',
-                cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes-Playa_de_Rodas_(9226466307).jpg',
+                cover: 'images/lugares/islas-cies_m.jpg.image.694.390.low (2).jpg',
                 images: [
-                    'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes-Playa_de_Rodas_(9226466307).jpg',
-                    'https://commons.wikimedia.org/wiki/Special:FilePath/Illas_Cíes,_pontevedra,_galiza.jpg',
-                    'https://commons.wikimedia.org/wiki/Special:FilePath/Islas_Cíes_desde_el_aire.jpg'
+                    'images/lugares/islas-cies_m.jpg.image.694.390.low (2).jpg',
+                    'images/cies-mapa.jpg',
+                    'images/lugares/Islas-Cies.jpg'
                 ],
                 paragraphs: [
                     'Las Islas Cíes forman parte del Parque Nacional Marítimo-Terrestre de las Islas Atlánticas y son uno de los espacios naturales más especiales de Galicia. Su acceso está regulado para conservar el equilibrio ambiental, por eso es importante planificar la visita con antelación en temporada alta.',
@@ -1407,10 +1407,62 @@ class SpainlyApp {
         }
     }
 
+    public toggleFavoriteAndUpdate(placeId: number, buttonElement?: HTMLElement): void {
+        const isFavorite = this.state.toggleFavorite(placeId);
+        
+        // Actualizar el contador en la barra de estadísticas
+        this.updateFavoriteCounter();
+        
+        // Actualizar el botón visualmente si se proporcionó
+        if (buttonElement) {
+            const icon = buttonElement.querySelector('i');
+            if (isFavorite) {
+                buttonElement.classList.add('favorite-active');
+                if (icon) icon.classList.add('text-yellow-300');
+            } else {
+                buttonElement.classList.remove('favorite-active');
+                if (icon) icon.classList.remove('text-yellow-300');
+            }
+        }
+        
+        this.state.showMessage('conseguido', isFavorite ? 'Lugar añadido a favoritos' : 'Lugar eliminado de favoritos');
+        
+        // Si estamos en la vista de detalles, actualizar el botón
+        if (this.currentView === 'place-details') {
+            this.showPlaceDetails(placeId);
+        }
+    }
+
+    private updateFavoriteCounter(): void {
+        const favoriteCountElement = document.getElementById('favoriteCount');
+        if (favoriteCountElement) {
+            const counters = this.state.getCounters();
+            favoriteCountElement.textContent = counters.favorites.toString();
+        }
+    }
+
+    private updateRatingCounter(): void {
+        const ratingCountElement = document.getElementById('ratingCount');
+        if (ratingCountElement) {
+            const counters = this.state.getCounters();
+            ratingCountElement.textContent = counters.ratings.toString();
+        }
+    }
+
     public ratePlace(placeId: number): void {
         const rating = prompt('Valora este lugar (1-5):');
         if (rating && parseInt(rating) >= 1 && parseInt(rating) <= 5) {
+            this.state.addRating(placeId, parseInt(rating));
+            this.updateRatingCounter();
             this.state.showMessage('conseguido', 'Valoración guardada correctamente');
+        }
+    }
+
+    public submitRating(placeId: number, rating: number): void {
+        if (rating >= 1 && rating <= 5) {
+            this.state.addRating(placeId, rating);
+            this.updateRatingCounter();
+            this.state.showMessage('conseguido', '¡Valoración guardada! Has dado ' + rating + ' estrellas');
         }
     }
 
@@ -1649,6 +1701,38 @@ class SpainlyApp {
                                         Ver en Google Maps
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Sistema de valoración con estrellas -->
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8">
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+                                <i class="fas fa-star text-spain-yellow mr-3"></i>Valora este lugar
+                            </h3>
+                            
+                            <!-- Estrellas interactivas -->
+                            <div class="flex justify-center items-center space-x-4 mb-6">
+                                ${[1, 2, 3, 4, 5].map(star => `
+                                    <button onclick="window.app.submitRating(${place.id}, ${star})" 
+                                            class="text-4xl transition-all duration-200 hover:scale-110 focus:outline-none ${star <= (this.state.getRating(place.id) || 0) ? 'text-spain-yellow' : 'text-gray-300 dark:text-gray-600 hover:text-spain-yellow'}">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                `).join('')}
+                            </div>
+                            
+                            <p class="text-center text-gray-600 dark:text-gray-400 mb-4">
+                                ${this.state.getRating(place.id) 
+                                    ? `Has valorado con ${this.state.getRating(place.id)} estrellas` 
+                                    : 'Haz clic en las estrellas para valorar'}
+                            </p>
+                            
+                            <!-- Botón de favoritos grande -->
+                            <div class="text-center">
+                                <button onclick="window.app.toggleFavoriteAndUpdate(${place.id})" 
+                                        class="px-8 py-3 ${this.state.isFavorite(place.id) ? 'bg-spain-red' : 'bg-gray-500'} text-white rounded-lg hover:bg-red-700 transition-colors inline-flex items-center">
+                                    <i class="fas fa-heart mr-2 ${this.state.isFavorite(place.id) ? 'text-yellow-300' : ''}"></i>
+                                    ${this.state.isFavorite(place.id) ? 'En tus favoritos' : 'Añadir a favoritos'}
+                                </button>
                             </div>
                         </div>
 

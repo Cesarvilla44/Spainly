@@ -5,6 +5,7 @@ export class SpainlyState {
     private static instance: SpainlyState;
     private places: Place[] = [];
     private favorites: number[] = [];
+    private ratings: { placeId: number; rating: number }[] = [];
     private currentUser: User | null = null;
     private theme: Theme = 'light';
     private counters: Counter = {
@@ -29,11 +30,13 @@ export class SpainlyState {
     private loadFromStorage(): void {
         try {
             const favorites = localStorage.getItem('favorites');
+            const ratings = localStorage.getItem('ratings');
             const user = localStorage.getItem('currentUser');
             const theme = localStorage.getItem('theme');
             const counters = localStorage.getItem('counters');
 
             if (favorites) this.favorites = JSON.parse(favorites);
+            if (ratings) this.ratings = JSON.parse(ratings);
             if (user) this.currentUser = JSON.parse(user);
             if (theme) this.theme = theme as Theme;
             if (counters) this.counters = JSON.parse(counters);
@@ -108,6 +111,36 @@ export class SpainlyState {
         return this.favorites.includes(placeId);
     }
 
+    public addRating(placeId: number, rating: number): void {
+        // Verificar si ya existe una valoración para este lugar
+        const existingIndex = this.ratings.findIndex(r => r.placeId === placeId);
+        
+        if (existingIndex > -1) {
+            // Actualizar valoración existente
+            const existingRating = this.ratings[existingIndex];
+            if (existingRating) {
+                existingRating.rating = rating;
+            }
+        } else {
+            // Añadir nueva valoración
+            this.ratings.push({ placeId, rating });
+            // Incrementar contador solo cuando es una nueva valoración
+            this.counters.ratings++;
+        }
+        
+        this.saveToStorage('ratings', this.ratings);
+        this.saveToStorage('counters', this.counters);
+    }
+
+    public getRating(placeId: number): number | null {
+        const rating = this.ratings.find(r => r.placeId === placeId);
+        return rating ? rating.rating : null;
+    }
+
+    public getTotalRatings(): number {
+        return this.ratings.length;
+    }
+
     public searchPlaces(query: string, filters: FilterOptions): Place[] {
         let results = this.places;
 
@@ -169,21 +202,23 @@ export class SpainlyState {
 
     // Métodos de utilidad
     public updateCountersDisplay(): void {
-        Object.entries(this.counters).forEach(([key, value]) => {
-            // Para el usuario, actualizar solo el contador numérico, no el icono
-            if (key === 'user') {
-                const countElement = document.getElementById('userCount');
-                if (countElement) {
-                    countElement.textContent = value.toString();
-                }
-            } else {
-                // Para otros contadores, actualizar el elemento completo
-                const element = document.getElementById(`${key}Counter`);
-                if (element) {
-                    element.textContent = value.toString();
-                }
-            }
-        });
+        // Actualizar contador de favoritos
+        const favoriteCountElement = document.getElementById('favoriteCount');
+        if (favoriteCountElement) {
+            favoriteCountElement.textContent = this.counters.favorites.toString();
+        }
+        
+        // Actualizar contador de valoraciones
+        const ratingCountElement = document.getElementById('ratingCount');
+        if (ratingCountElement) {
+            ratingCountElement.textContent = this.counters.ratings.toString();
+        }
+        
+        // Actualizar contador de usuario
+        const userCountElement = document.getElementById('userCount');
+        if (userCountElement) {
+            userCountElement.textContent = this.counters.user.toString();
+        }
     }
 
     public showMessage(type: 'conseguido' | 'error', message: string): void {
