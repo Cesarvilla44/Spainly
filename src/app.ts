@@ -606,7 +606,52 @@ class SpainlyApp {
         this.setupButton('reportsBtn', () => this.goToReports());
         this.setupButton('aboutBtn', () => this.goToAbout());
         
+        // Configurar menú hamburguesa móvil
+        this.setupMobileMenu();
+        
         console.log('Botones principales configurados');
+    }
+
+    private setupMobileMenu(): void {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+            
+            // Configurar botones del menú móvil
+            const registerBtnMobile = document.getElementById('registerBtnMobile');
+            const loginBtnMobile = document.getElementById('loginBtnMobile');
+            const reportsBtnMobile = document.getElementById('reportsBtnMobile');
+            const aboutBtnMobile = document.getElementById('aboutBtnMobile');
+            
+            registerBtnMobile?.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                this.openModal('registerModal');
+            });
+            
+            loginBtnMobile?.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                this.openModal('loginModal');
+            });
+            
+            reportsBtnMobile?.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                this.goToReports();
+            });
+            
+            aboutBtnMobile?.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                this.goToAbout();
+            });
+        }
     }
     
     private setupButton(buttonId: string, callback: () => void): void {
@@ -977,22 +1022,22 @@ class SpainlyApp {
             </div>
                 </section>
 
-                <section class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
-                        <i class="fas fa-star text-spain-yellow mr-3"></i>
+                <section class="mb-8 md:mb-12">
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-8 text-center">
+                        <i class="fas fa-star text-spain-yellow mr-2 md:mr-3"></i>
                         Lugares Recomendados
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
                         ${topPlaces.map(place => this.createSimplePlaceCard(place)).join('')}
                     </div>
                 </section>
                 
                 <section>
-                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
-                        <i class="fas fa-map-marked-alt text-spain-red mr-3"></i>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4 md:mb-8 text-center">
+                        <i class="fas fa-map-marked-alt text-spain-red mr-2 md:mr-3"></i>
                         Todos los Lugares
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="placesContainer">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8" id="placesContainer">
                         ${allPlaces.map(place => this.createSimplePlaceCard(place)).join('')}
                     </div>
                 </section>
@@ -1012,19 +1057,19 @@ class SpainlyApp {
     private createSimplePlaceCard(place: Place): string {
         return `
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <img src="${place.image}" alt="${place.name}" class="w-full h-48 object-cover" onerror="this.src='https://picsum.photos/seed/${place.id}/400/300.jpg'">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">${place.name}</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${place.description}</p>
-                    <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                        <span>⭐ ${place.rating} (${place.reviews.toLocaleString()})</span>
-                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs">${place.category}</span>
+                <img src="${place.image}" alt="${place.name}" class="w-full h-40 sm:h-48 object-cover" onerror="this.src='https://picsum.photos/seed/${place.id}/400/300.jpg'">
+                <div class="p-3 sm:p-4">
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-1.5 sm:mb-2 line-clamp-1">${place.name}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2 line-clamp-2">${place.description}</p>
+                    <div class="flex items-center justify-between text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                        <span class="flex items-center"><span class="mr-1">⭐</span>${place.rating} <span class="hidden sm:inline">(${place.reviews.toLocaleString()})</span></span>
+                        <span class="px-2 py-0.5 sm:py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs">${place.category}</span>
                     </div>
-                    <div class="mt-3 flex space-x-2">
-                        <button onclick="window.app.showPlaceDetails(${place.id})" class="flex-1 px-3 py-1 bg-spain-yellow text-gray-800 text-sm rounded hover:bg-yellow-400 transition-colors">
-                            <i class="fas fa-info-circle mr-1"></i>Detalles
+                    <div class="mt-2.5 sm:mt-3 flex space-x-2">
+                        <button onclick="window.app.showPlaceDetails(${place.id})" class="flex-1 px-3 py-2 sm:py-1.5 bg-spain-yellow text-gray-800 text-sm sm:text-base rounded hover:bg-yellow-400 transition-colors min-h-[44px] sm:min-h-0 flex items-center justify-center">
+                            <i class="fas fa-info-circle mr-1.5 sm:mr-1"></i><span class="sm:hidden">Ver</span><span class="hidden sm:inline">Detalles</span>
                         </button>
-                        <button onclick="window.app.toggleFavoriteAndUpdate(${place.id}, this)" class="px-3 py-1 bg-spain-red text-white text-sm rounded hover:bg-red-600 transition-colors ${this.state.isFavorite(place.id) ? 'favorite-active' : ''}">
+                        <button onclick="window.app.toggleFavoriteAndUpdate(${place.id}, this)" class="px-3 py-2 sm:py-1.5 bg-spain-red text-white text-sm rounded hover:bg-red-600 transition-colors min-h-[44px] sm:min-h-0 w-12 sm:w-auto flex items-center justify-center ${this.state.isFavorite(place.id) ? 'favorite-active' : ''}">
                             <i class="fas fa-heart ${this.state.isFavorite(place.id) ? 'text-yellow-300' : ''}"></i>
                         </button>
                     </div>
