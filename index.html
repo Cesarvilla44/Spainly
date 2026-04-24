@@ -18,7 +18,10 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -37,21 +40,26 @@
                 
                 <div class="flex items-center space-x-4">
                     <!-- Botones de usuario -->
-                    <button id="registerBtn" class="px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <button id="registerBtn" class="px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700 transition-colors" 
+                        aria-label="Abrir formulario de registro">
                         <i class="fas fa-user-plus mr-2"></i>Registrarse
                     </button>
-                    <button id="loginBtn" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                    <button id="loginBtn" class="px-4 py-2 bg-spain-yellow text-gray-800 rounded-lg hover:bg-yellow-500 transition-colors"
+                        aria-label="Abrir formulario de inicio de sesión">
                         <i class="fas fa-sign-in-alt mr-2"></i>Iniciar sesión
                     </button>
-                    <button id="reportsBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <button id="reportsBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                        aria-label="Ver reportajes de lugares">
                         <i class="fas fa-newspaper mr-2"></i>Reportajes
                     </button>
-                    <button id="aboutBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                    <button id="aboutBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                        aria-label="Ver información sobre el proyecto">
                         <i class="fas fa-info-circle mr-2"></i>Sobre mí
                     </button>
                     
                     <!-- Botón modo oscuro -->
-                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" onclick="toggleTheme()">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" 
+                            onclick="toggleTheme()" aria-label="Cambiar entre modo claro y oscuro">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline"></i>
                     </button>
@@ -202,12 +210,14 @@
 
     <!-- Modales -->
     <!-- Modal de Registro -->
-    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center" 
+         role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button id="closeRegisterModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button id="closeRegisterModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                        aria-label="Cerrar modal de registro">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+            <h3 id="registerModalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                 <i class="fas fa-user-plus text-spain-red mr-2"></i>Registrarse
             </h3>
             <form id="registerForm">
@@ -236,12 +246,14 @@
     </div>
 
     <!-- Modal de Inicio de Sesión -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center" 
+         role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                        aria-label="Cerrar modal de inicio de sesión">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+            <h3 id="loginModalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                 <i class="fas fa-sign-in-alt text-spain-yellow mr-2"></i>Iniciar Sesión
             </h3>
             <form id="loginForm">
@@ -312,65 +324,10 @@
         }
 
         function openReportsPage() {
-            const reportsHTML = `
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Reportajes - Spainly</title>
-                    <script src="https://cdn.tailwindcss.com"><\/script>
-                    <script>
-                        tailwind.config = {
-                            darkMode: 'class',
-                            theme: {
-                                extend: {
-                                    colors: {
-                                        'spain-red': '#c41e3a',
-                                        'spain-yellow': '#f1bf00'
-                                    }
-                                }
-                            }
-                        };
-                    <\/script>
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                </head>
-                <body class="bg-gray-50">
-                    <div class="container mx-auto px-4 py-8">
-                        <button onclick="window.close()" class="mb-6 px-4 py-2 bg-spain-red text-white rounded-lg hover:bg-red-700">
-                            <i class="fas fa-arrow-left mr-2"></i>Cerrar
-                        </button>
-
-                        <h1 class="text-3xl font-bold text-gray-800 mb-6">
-                            <i class="fas fa-newspaper text-blue-600 mr-3"></i>Reportajes
-                        </h1>
-
-                        <div class="bg-white rounded-xl shadow-lg p-6">
-                            <p class="text-gray-600 mb-4">Descubre los mejores reportajes sobre los lugares mas impresionantes de Espana.</p>
-                            <div class="space-y-4">
-                                <div class="border border-gray-200 rounded-lg p-4">
-                                    <h3 class="font-bold text-gray-800 mb-2">Las Maravillas de Gaudi</h3>
-                                    <p class="text-gray-600">Un recorrido por las obras mas emblematicas del arquitecto modernista catalan.</p>
-                                </div>
-                                <div class="border border-gray-200 rounded-lg p-4">
-                                    <h3 class="font-bold text-gray-800 mb-2">Playas Paradisiacas</h3>
-                                    <p class="text-gray-600">Descubre las playas mas bonitas de la costa espanola.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `;
-
-            const win = window.open('', '_blank');
-            if (win) {
-                win.document.open();
-                win.document.write(reportsHTML);
-                win.document.close();
-            }
+            showMessage('Reportajes: Función en desarrollo');
         }
 
+        
         let homeMainContent = '';
 
         function restoreHomeContent() {
@@ -534,6 +491,20 @@
                 e.preventDefault();
                 closeModal('loginModal');
                 showMessage('Login: función en desarrollo');
+            });
+
+            // Manejo de tecla Escape para cerrar modales
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const registerModal = document.getElementById('registerModal');
+                    const loginModal = document.getElementById('loginModal');
+                    
+                    if (registerModal && !registerModal.classList.contains('hidden')) {
+                        closeModal('registerModal');
+                    } else if (loginModal && !loginModal.classList.contains('hidden')) {
+                        closeModal('loginModal');
+                    }
+                }
             });
         });
     </script>
