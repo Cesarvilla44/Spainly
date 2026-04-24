@@ -638,24 +638,30 @@ class SpainlyApp {
         
         // Formulario de registro
         const registerForm = document.getElementById('registerForm');
+        console.log('Formulario de registro encontrado:', registerForm ? 'SÍ' : 'NO');
         if (registerForm) {
             registerForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                console.log('Submit del formulario de registro capturado');
                 const username = (document.getElementById('regUsername') as HTMLInputElement)?.value;
                 const email = (document.getElementById('regEmail') as HTMLInputElement)?.value;
                 const password = (document.getElementById('regPassword') as HTMLInputElement)?.value;
+                console.log('Datos del registro:', { username, email, password: password ? '***' : 'undefined' });
                 this.handleRegister(username, email, password);
             });
         }
         
         // Formulario de login
         const loginForm = document.getElementById('loginForm');
+        console.log('Formulario de login encontrado:', loginForm ? 'SÍ' : 'NO');
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                console.log('Submit del formulario de login capturado');
                 const email = (document.getElementById('loginEmail') as HTMLInputElement)?.value;
                 const password = (document.getElementById('loginPassword') as HTMLInputElement)?.value;
                 const keepSession = (document.getElementById('keepSession') as HTMLInputElement)?.checked;
+                console.log('Datos del login:', { email, password: password ? '***' : 'undefined', keepSession });
                 this.handleLogin(email, password, keepSession);
             });
         }
@@ -2407,6 +2413,8 @@ class SpainlyApp {
     }
 
     public handleRegister(username: string, email: string, password: string): void {
+        console.log('handleRegister llamado con:', { username, email, password: password ? '***' : 'undefined' });
+        
         if (!username || !email || !password) {
             this.state.showMessage('error', 'Por favor completa todos los campos');
             return;
@@ -2429,12 +2437,15 @@ class SpainlyApp {
     }
 
     public handleLogin(email: string, password: string, keepSession: boolean): void {
+        console.log('handleLogin llamado con:', { email, password: password ? '***' : 'undefined', keepSession });
+        
         if (!email || !password) {
             this.state.showMessage('error', 'Por favor introduce email y contraseña');
             return;
         }
 
         const success = this.state.login(email, password, keepSession);
+        console.log('Resultado login:', success);
         
         if (success) {
             // Cerrar modal

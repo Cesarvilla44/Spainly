@@ -51,6 +51,7 @@ export class SpainlyState {
     private saveToStorage(key: string, data: any): void {
         try {
             localStorage.setItem(key, JSON.stringify(data));
+            console.log(`Guardado en localStorage: ${key}`, data);
         } catch (error) {
             console.error('Error saving to storage:', error);
         }
@@ -215,21 +216,32 @@ export class SpainlyState {
         // Crear usuario básico, el perfil completo se completa después
         this.currentUser = { username, email, password };
         this.saveToStorage('currentUser', this.currentUser);
+        console.log('Usuario registrado y guardado:', { username, email, password: '***' });
     }
 
     public login(email: string, password: string, keepSession: boolean = false): boolean {
         // En una app real, aquí verificaríamos contra una base de datos
         // Por ahora, simulamos que el login es exitoso si hay un usuario registrado
         const storedUser = localStorage.getItem('currentUser');
+        console.log('Intentando login con:', { email, password: '***' });
+        console.log('Usuario en localStorage:', storedUser);
+        
         if (storedUser) {
             const user = JSON.parse(storedUser);
+            console.log('Comparando:', { storedEmail: user.email, inputEmail: email, match: user.email === email });
+            
             if (user.email === email && user.password === password) {
                 this.currentUser = { ...user, keepSession };
                 this.counters.user = 1;
                 this.saveToStorage('currentUser', this.currentUser);
                 this.saveToStorage('counters', this.counters);
+                console.log('Login exitoso');
                 return true;
+            } else {
+                console.log('Credenciales incorrectas');
             }
+        } else {
+            console.log('No hay usuario registrado en localStorage');
         }
         return false;
     }
@@ -267,8 +279,11 @@ export class SpainlyState {
 
     public updateUserProfile(profileData: Partial<User>): void {
         if (this.currentUser) {
+            const prevUser = { ...this.currentUser };
             this.currentUser = { ...this.currentUser, ...profileData };
             this.saveToStorage('currentUser', this.currentUser);
+            console.log('Perfil actualizado. Antes:', { email: prevUser.email, password: prevUser.password ? '***' : 'none' });
+            console.log('Perfil actualizado. Después:', { email: this.currentUser.email, password: this.currentUser.password ? '***' : 'none' });
         }
     }
 
