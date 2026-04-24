@@ -1593,7 +1593,7 @@ class SpainlyApp {
 
     private goToAbout(): void {
         console.log('Navegando a sobre mí...');
-        this.showAboutPage();
+        this.state.showMessage('conseguido', 'Sobre mí: Función en desarrollo');
     }
 
     private handleSearch(query: string = '', filters: FilterOptions = {}): void {
