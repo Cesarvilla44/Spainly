@@ -250,10 +250,9 @@
 
     <!-- Modales -->
     <!-- Modal de Registro -->
-    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-y-auto" 
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4" 
          role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-5 md:p-8 max-w-md w-full mx-4 relative">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-5 md:p-8 max-w-md w-full mx-4 relative max-h-[90vh] overflow-y-auto">
                 <button id="closeRegisterModal" class="absolute top-3 right-3 md:top-4 md:right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-1"
                             aria-label="Cerrar modal de registro">
                     <i class="fas fa-times text-lg md:text-xl"></i>
@@ -285,13 +284,11 @@
                 </form>
             </div>
         </div>
-    </div>
 
     <!-- Modal de Inicio de Sesión -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-y-auto" 
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4" 
          role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-5 md:p-8 max-w-md w-full mx-4 relative">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-5 md:p-8 max-w-md w-full mx-4 relative max-h-[90vh] overflow-y-auto">
                 <button id="closeLoginModal" class="absolute top-3 right-3 md:top-4 md:right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-1"
                             aria-label="Cerrar modal de inicio de sesión">
                     <i class="fas fa-times text-lg md:text-xl"></i>
@@ -323,7 +320,6 @@
                 </form>
             </div>
         </div>
-    </div>
 
     <!-- Mensaje "Conseguido" -->
     <div id="conseguidoMessage" class="fixed top-4 right-4 left-4 md:left-auto bg-green-500 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg shadow-lg z-50 hidden text-center md:text-left">
