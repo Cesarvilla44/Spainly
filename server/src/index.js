@@ -109,12 +109,13 @@ app.use((error, req, res, next) => {
 const PORT = config.port;
 
 app.listen(PORT, () => {
+  const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
   console.log('🚀 Servidor Spainly iniciado correctamente');
   console.log(`📍 Puerto: ${PORT}`);
   console.log(`🌍 Entorno: ${config.nodeEnv}`);
-  console.log(`🔗 URL: http://localhost:${PORT}`);
-  console.log(`📚 API Base: http://localhost:${PORT}/api`);
-  console.log(`❤️  Health Check: http://localhost:${PORT}/api/settings/health`);
+  console.log(`🔗 URL: ${baseUrl}`);
+  console.log(`📚 API Base: ${baseUrl}/api`);
+  console.log(`❤️  Health Check: ${baseUrl}/api/settings/health`);
   console.log('📖 Endpoints disponibles:');
   console.log('   • Tasks: GET, POST, PUT, DELETE /api/tasks');
   console.log('   • Reminders: GET, POST, PUT, DELETE /api/reminders');

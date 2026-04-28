@@ -3,8 +3,10 @@
  * Proporciona métodos para consumir los endpoints de la API
  */
 
+require('dotenv').config();
+
 class ApiClient {
-  constructor(baseUrl = 'http://localhost:3000/api') {
+  constructor(baseUrl = process.env.API_BASE_URL || 'http://localhost:3000/api') {
     this.baseUrl = baseUrl;
   }
 

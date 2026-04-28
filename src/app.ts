@@ -18,6 +18,7 @@ class SpainlyApp {
     private searchBar: SearchBar;
     private currentView: string = 'home';
     private homeMainContent: string = '';
+    private modalListenersConfigured: boolean = false;
 
     private constructor() {
         this.state = SpainlyState.getInstance();
@@ -80,9 +81,8 @@ class SpainlyApp {
     }
 
     private getApiUrl(endpoint: string): string {
-        const baseUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:3001' 
-            : '';
+        const baseUrl = (window as any).ENV?.API_URL || 
+            (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
         return `${baseUrl}${endpoint}`;
     }
 
@@ -578,10 +578,11 @@ class SpainlyApp {
         // Configurar todos los listeners inmediatamente
         this.setupThemeToggle();
         this.setupSimpleButtonListeners();
+        this.setupNavigationListeners();
         this.setupModalListeners();
         this.setupSearchListeners();
         this.setupProfileListeners();
-        
+
         console.log('Event listeners configurados correctamente');
     }
 
@@ -589,8 +590,6 @@ class SpainlyApp {
         console.log('Configurando event listeners de navegación...');
         
         // Configurar solo los botones que existen en el HTML
-        this.setupButton('registerBtn', () => this.openModal('registerModal'));
-        this.setupButton('loginBtn', () => this.openModal('loginModal'));
         this.setupButton('reportsBtn', () => this.goToReports());
         this.setupButton('aboutBtn', () => this.goToAbout());
         
@@ -676,41 +675,48 @@ class SpainlyApp {
 
     private setupModalListeners(): void {
         console.log('Configurando listeners de modales...');
-        
+
+        // Evitar configurar listeners múltiples veces
+        if (this.modalListenersConfigured) {
+            console.log('Listeners de modales ya configurados, omitiendo...');
+            return;
+        }
+
         // Botones para cerrar modales
         this.setupButton('closeRegisterModal', () => this.closeModal('registerModal'));
         this.setupButton('closeLoginModal', () => this.closeModal('loginModal'));
-        
-        // Formulario de registro
-        const registerForm = document.getElementById('registerForm');
-        console.log('Formulario de registro encontrado:', registerForm ? 'SÍ' : 'NO');
-        if (registerForm) {
-            registerForm.addEventListener('submit', (e) => {
+
+        // Formulario de registro - usar event delegation en el document
+        document.addEventListener('submit', (e) => {
+            const target = e.target as HTMLFormElement;
+            if (target && target.id === 'registerForm') {
                 e.preventDefault();
+                e.stopPropagation();
                 console.log('Submit del formulario de registro capturado');
                 const username = (document.getElementById('regUsername') as HTMLInputElement)?.value;
                 const email = (document.getElementById('regEmail') as HTMLInputElement)?.value;
                 const password = (document.getElementById('regPassword') as HTMLInputElement)?.value;
                 console.log('Datos del registro:', { username, email, password: password ? '***' : 'undefined' });
                 this.handleRegister(username, email, password);
-            });
-        }
-        
-        // Formulario de login
-        const loginForm = document.getElementById('loginForm');
-        console.log('Formulario de login encontrado:', loginForm ? 'SÍ' : 'NO');
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
+            }
+        }, true);
+
+        // Formulario de login - usar event delegation en el document
+        document.addEventListener('submit', (e) => {
+            const target = e.target as HTMLFormElement;
+            if (target && target.id === 'loginForm') {
                 e.preventDefault();
+                e.stopPropagation();
                 console.log('Submit del formulario de login capturado');
                 const email = (document.getElementById('loginEmail') as HTMLInputElement)?.value;
                 const password = (document.getElementById('loginPassword') as HTMLInputElement)?.value;
                 const keepSession = (document.getElementById('keepSession') as HTMLInputElement)?.checked;
                 console.log('Datos del login:', { email, password: password ? '***' : 'undefined', keepSession });
                 this.handleLogin(email, password, keepSession);
-            });
-        }
-        
+            }
+        }, true);
+
+        this.modalListenersConfigured = true;
         console.log('Listeners de modales configurados');
     }
     
@@ -1045,7 +1051,6 @@ class SpainlyApp {
         `;
         
         // Reconfigurar listeners después de renderizar
-        this.setupModalListeners();
         this.setupSearchListeners();
         this.setupHomeSearchListeners();
 
@@ -1527,7 +1532,7 @@ class SpainlyApp {
     }
 
     // Métodos esenciales para botones
-    private openModal(modalId: string): void {
+    public openModal(modalId: string): void {
         const modal = document.getElementById(modalId);
         if (modal) {
             modal.classList.remove('hidden');
@@ -1766,9 +1771,6 @@ class SpainlyApp {
                 placesContainer.innerHTML = filteredPlaces.map(place => this.createSimplePlaceCard(place)).join('');
             }
         }
-        
-        // Reconfigurar listeners
-        this.setupModalListeners();
     }
 
     public showPlaceDetails(placeId: number): void {

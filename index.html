@@ -328,6 +328,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="config.js"></script>
     <script type="module" src="dist/app.js"></script>
     <script>
         function toggleTheme() {
@@ -518,19 +519,8 @@
                 document.documentElement.classList.add('dark');
             }
 
-            const registerBtn = document.getElementById('registerBtn');
-            const loginBtn = document.getElementById('loginBtn');
             const reportsBtn = document.getElementById('reportsBtn');
             const aboutBtn = document.getElementById('aboutBtn');
-            const closeRegisterModal = document.getElementById('closeRegisterModal');
-            const closeLoginModal = document.getElementById('closeLoginModal');
-            const registerForm = document.getElementById('registerForm');
-            const loginForm = document.getElementById('loginForm');
-
-            registerBtn?.addEventListener('click', () => openModal('registerModal'));
-            loginBtn?.addEventListener('click', () => openModal('loginModal'));
-            closeRegisterModal?.addEventListener('click', () => closeModal('registerModal'));
-            closeLoginModal?.addEventListener('click', () => closeModal('loginModal'));
 
             reportsBtn?.addEventListener('click', () => {
                 if (window.app && typeof window.app.goToReports === 'function') {
