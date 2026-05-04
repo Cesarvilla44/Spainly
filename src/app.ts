@@ -81,8 +81,7 @@ class SpainlyApp {
     }
 
     private getApiUrl(endpoint: string): string {
-        const baseUrl = (window as any).ENV?.API_URL || 
-            (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+        const baseUrl = (window as any).ENV?.API_URL || '';
         return `${baseUrl}${endpoint}`;
     }
 
