@@ -25,7 +25,7 @@
 - [x] Eliminar listeners duplicados
 - [x] Implementar event delegation para formularios
 
-gi
+
 ## 🏷️ Etiquetas (Labels)
 
 - 🔴 **Alta Prioridad** - Crítico para MVP
