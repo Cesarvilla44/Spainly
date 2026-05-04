@@ -1,53 +1,5 @@
 # Tablero Trello - Proyecto Spainly
 
-## 📋 Por Hacer (To Do)
-
-### 🔒 Seguridad
-- [ ] Implementar autenticación real con JWT
-- [ ] Configurar HTTPS en producción
-- [ ] Sanitizar inputs de usuario contra XSS
-- [ ] Implementar rate limiting en API
-- [ ] Configurar CORS correctamente para producción
-- [ ] Implementar validación de emails en backend
-- [ ] Encriptar contraseñas con bcrypt
-- [ ] Implementar refresh tokens
-
-### 🗄️ Backend
-- [ ] Conectar a base de datos real (PostgreSQL/MongoDB)
-- [ ] Implementar endpoints de autenticación
-- [ ] Crear API REST completa
-- [ ] Implementar file upload para fotos de perfil
-- [ ] Configurar variables de entorno en producción
-- [ ] Implementar logging estructurado
-- [ ] Crear tests unitarios para backend
-
-### 🎨 Frontend
-- [ ] Migrar a React completo
-- [ ] Implementar state management (Redux/Zustand)
-- [ ] Crear componentes reutilizables
-- [ ] Implementar loading states
-- [ ] Optimizar imágenes y assets
-- [ ] Implementar PWA features
-- [ ] Crear tests unitarios para frontend
-
-### 🌐 Features
-- [ ] Sistema de valoraciones persistente
-- [ ] Historial de búsqueda persistente
-- [ ] Sistema de favoritos con sincronización
-- [ ] Perfil de usuario completo
-- [ ] Sistema de comentarios/reviews
-- [ ] Mapa interactivo con lugares
-- [ ] Filtros avanzados de búsqueda
-- [ ] Sistema de recomendaciones
-
-## 🚧 En Progreso (In Progress)
-
-### 🔧 Mantenimiento
-- [ ] Corregir problemas de login después de logout
-- [ ] Eliminar archivos obsoletos (Modal.ts, Modal.tsx)
-- [ ] Limpiar código duplicado
-- [ ] Optimizar bundle size
-
 ## ✅ Completado (Done)
 
 ### 🎯 Core Features
