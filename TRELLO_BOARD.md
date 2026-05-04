@@ -38,7 +38,7 @@ gi
 - 📱 **Mobile** - Features móviles
 - 🌐 **Web** - Features web
 
-## 👥 Miembros del Equipo
+## 👥 Desarrollador del proyecto
 
 - @Cesarvilla44 - Desarrollador (César Villacañas Moreno).
 
