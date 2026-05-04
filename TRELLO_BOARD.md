@@ -16,7 +16,7 @@
 
 ### 🔒 Seguridad
 - [x] Mover URLs hardcodeadas a variables de entorno
-- [x] Crear archivo .env.example
+- [x] Crear archivo .env para variables de entorno
 - [x] Configurar .gitignore para .env
 
 ### 🐛 Bug Fixes
