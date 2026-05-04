@@ -25,7 +25,7 @@
 - [x] Eliminar listeners duplicados
 - [x] Implementar event delegation para formularios
 
-
+gi
 ## 🏷️ Etiquetas (Labels)
 
 - 🔴 **Alta Prioridad** - Crítico para MVP
@@ -40,7 +40,7 @@
 
 ## 👥 Miembros del Equipo
 
-- @Cesarvilla44 - Desarrollador Principal
+- @Cesarvilla44 - Desarrollador (César Villacañas Moreno).
 
 ## 📁 Archivos de Referencia
 
