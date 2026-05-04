@@ -25,25 +25,6 @@
 - [x] Eliminar listeners duplicados
 - [x] Implementar event delegation para formularios
 
-## 📅 Backlog
-
-### 🚀 Futuras Features
-- [ ] Sistema de itinerarios personalizados
-- [ ] Integración con APIs de turismo
-- [ ] Sistema de reseñas con fotos
-- [ ] Chat entre usuarios
-- [ ] Sistema de eventos/tours
-- [ ] Integración con redes sociales
-- [ ] Gamificación (badges, puntos)
-- [ ] Sistema de notificaciones
-- [ ] App móvil nativa (React Native)
-- [ ] Multi-idioma (i18n)
-
-### 📊 Analytics
-- [ ] Implementar Google Analytics
-- [ ] Track de eventos de usuario
-- [ ] Dashboard de estadísticas
-- [ ] A/B testing
 
 ## 🏷️ Etiquetas (Labels)
 
