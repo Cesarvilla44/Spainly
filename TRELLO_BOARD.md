@@ -1,4 +1,17 @@
 # Tablero Trello - Proyecto Spainly
+
+## 📋 Por Hacer (To Do)
+
+### 🔒 Seguridad
+- [ ] Implementar autenticación real con JWT
+- [ ] Configurar HTTPS en producción
+- [ ] Sanitizar inputs de usuario contra XSS
+- [ ] Implementar rate limiting en API
+- [ ] Configurar CORS correctamente para producción
+- [ ] Implementar validación de emails en backend
+- [ ] Encriptar contraseñas con bcrypt
+- [ ] Implementar refresh tokens
+
 ### 🗄️ Backend
 - [ ] Conectar a base de datos real (PostgreSQL/MongoDB)
 - [ ] Implementar endpoints de autenticación
